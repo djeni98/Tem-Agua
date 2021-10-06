@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B72A141F270E3255001303BB /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A141E270E3255001303BB /* UIColor+.swift */; };
+		B72A1424270E3686001303BB /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A1423270E3686001303BB /* GradientBackgroundView.swift */; };
 		B77E60FE270DCDB700C24620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E60FD270DCDB700C24620 /* AppDelegate.swift */; };
 		B77E6100270DCDB700C24620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E60FF270DCDB700C24620 /* SceneDelegate.swift */; };
 		B77E6102270DCDB700C24620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E6101270DCDB700C24620 /* ViewController.swift */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B72A141E270E3255001303BB /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		B72A1423270E3686001303BB /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 		B77E60FA270DCDB600C24620 /* Rodizio de Agua.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rodizio de Agua.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B77E60FD270DCDB700C24620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B77E60FF270DCDB700C24620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,6 +39,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B72A141D270E3240001303BB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B72A141E270E3255001303BB /* UIColor+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B72A1422270E3674001303BB /* SharedComponents */ = {
+			isa = PBXGroup;
+			children = (
+				B72A1423270E3686001303BB /* GradientBackgroundView.swift */,
+			);
+			path = SharedComponents;
+			sourceTree = "<group>";
+		};
 		B77E60F1270DCDB600C24620 = {
 			isa = PBXGroup;
 			children = (
@@ -57,6 +77,8 @@
 				B77E60FD270DCDB700C24620 /* AppDelegate.swift */,
 				B77E60FF270DCDB700C24620 /* SceneDelegate.swift */,
 				B77E6101270DCDB700C24620 /* ViewController.swift */,
+				B72A1422270E3674001303BB /* SharedComponents */,
+				B72A141D270E3240001303BB /* Extensions */,
 				B77E6106270DCDB900C24620 /* Assets.xcassets */,
 				B77E6108270DCDB900C24620 /* LaunchScreen.storyboard */,
 				B77E610B270DCDB900C24620 /* Info.plist */,
@@ -135,8 +157,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B77E6102270DCDB700C24620 /* ViewController.swift in Sources */,
+				B72A141F270E3255001303BB /* UIColor+.swift in Sources */,
 				B77E60FE270DCDB700C24620 /* AppDelegate.swift in Sources */,
 				B77E6100270DCDB700C24620 /* SceneDelegate.swift in Sources */,
+				B72A1424270E3686001303BB /* GradientBackgroundView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
