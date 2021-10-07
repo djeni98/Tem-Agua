@@ -16,6 +16,7 @@
 		B775D17A270F096200E9DFB4 /* RightBalloonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D179270F096200E9DFB4 /* RightBalloonView.swift */; };
 		B775D17C270F0B6600E9DFB4 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D17B270F0B6500E9DFB4 /* UIFont+.swift */; };
 		B775D17E270F0B9500E9DFB4 /* WaterQuestionBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D17D270F0B9500E9DFB4 /* WaterQuestionBalloon.swift */; };
+		B775D184270F0FFC00E9DFB4 /* AnswerBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D183270F0FFC00E9DFB4 /* AnswerBalloon.swift */; };
 		B77E60FE270DCDB700C24620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E60FD270DCDB700C24620 /* AppDelegate.swift */; };
 		B77E6100270DCDB700C24620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E60FF270DCDB700C24620 /* SceneDelegate.swift */; };
 		B77E6102270DCDB700C24620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E6101270DCDB700C24620 /* ViewController.swift */; };
@@ -32,6 +33,7 @@
 		B775D179270F096200E9DFB4 /* RightBalloonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightBalloonView.swift; sourceTree = "<group>"; };
 		B775D17B270F0B6500E9DFB4 /* UIFont+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		B775D17D270F0B9500E9DFB4 /* WaterQuestionBalloon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterQuestionBalloon.swift; sourceTree = "<group>"; };
+		B775D183270F0FFC00E9DFB4 /* AnswerBalloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnswerBalloon.swift; path = "Rodizio de Agua/Extensions/AnswerBalloon.swift"; sourceTree = SOURCE_ROOT; };
 		B77E60FA270DCDB600C24620 /* Rodizio de Agua.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rodizio de Agua.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B77E60FD270DCDB700C24620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B77E60FF270DCDB700C24620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				B775D17D270F0B9500E9DFB4 /* WaterQuestionBalloon.swift */,
+				B775D183270F0FFC00E9DFB4 /* AnswerBalloon.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 				B775D17E270F0B9500E9DFB4 /* WaterQuestionBalloon.swift in Sources */,
 				B775D17C270F0B6600E9DFB4 /* UIFont+.swift in Sources */,
 				B77E6102270DCDB700C24620 /* ViewController.swift in Sources */,
+				B775D184270F0FFC00E9DFB4 /* AnswerBalloon.swift in Sources */,
 				B72A141F270E3255001303BB /* UIColor+.swift in Sources */,
 				B77E60FE270DCDB700C24620 /* AppDelegate.swift in Sources */,
 				B77E6100270DCDB700C24620 /* SceneDelegate.swift in Sources */,
