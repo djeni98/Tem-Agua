@@ -58,7 +58,17 @@ class HomeViewController: ScrollableViewController {
         contentStackView.addArrangedSubview(headerView)
         contentStackView.addArrangedSubview(rightBalloonsContainer)
 
-        rightBalloonsContainer.addArrangedSubview(AnswerBalloon())
+        setupRightBalloons()
+    }
+
+    private func setupRightBalloons() {
+        let answerBalloon = AnswerBalloon()
+        rightBalloonsContainer.addArrangedSubview(answerBalloon)
+
+        let rotationBalloon = WaterRotationBalloon()
+        // rotationBalloon.configure(isNextRotation: true, rotationInfoText: "Teste")
+        rightBalloonsContainer.addArrangedSubview(rotationBalloon)
+
     }
 
     override func viewDidLoad() {
