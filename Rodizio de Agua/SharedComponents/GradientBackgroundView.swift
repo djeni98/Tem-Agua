@@ -47,4 +47,15 @@ class GradientBackgroundView: UIView {
     override open class var layerClass: AnyClass {
         return CAGradientLayer.classForCoder()
     }
+
+    static func getBlueLinearGradient() -> GradientBackgroundView {
+        let gradient = GradientBackgroundView()
+        gradient.startColor = .systemIndigo
+        gradient.endColor = .systemBlue
+
+        gradient.startPoint = CGPoint(x: 0, y: 1)
+        gradient.endPoint = CGPoint(x: 1, y: 0)
+
+        return gradient
+    }
 }
