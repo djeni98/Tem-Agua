@@ -58,7 +58,26 @@ class HomeViewController: ScrollableViewController {
         contentStackView.addArrangedSubview(headerView)
         contentStackView.addArrangedSubview(rightBalloonsContainer)
 
+        let locationButton = createButton(with: "API Location", action: #selector(requestLocationInfo))
+        contentStackView.addArrangedSubview(locationButton)
+
+        let currentRotationButton = createButton(with: "API Current Rotation", action: #selector(requestCurrentWaterRotation))
+        contentStackView.addArrangedSubview(currentRotationButton)
+
         setupRightBalloons()
+    }
+
+    private func createButton(with title: String, action: Selector) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.addTarget(self, action: action, for: .touchUpInside)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 10
+        button.snp.makeConstraints { make in
+            make.height.equalTo(60)
+        }
+
+        return button
     }
 
     private func setupRightBalloons() {
@@ -75,6 +94,27 @@ class HomeViewController: ScrollableViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+
+    @objc private func requestLocationInfo() {
+        let api = APIService()
+        let x = -5480472.128074637
+        let y = -2931193.211922049
+
+        api.getLocationRelatedInfo(x: x, y: y) { id, polygonCoordinates in
+            print("Id = \(id)")
+        }
+
+    }
+
+    @objc private func requestCurrentWaterRotation() {
+        let api = APIService()
+        let objectId = 117
+
+        api.getCurrentWaterRotation(objectId: objectId) { relatedRecords in
+            print("RelatedRecords.count:", relatedRecords.count)
+            print(relatedRecords)
+        }
     }
 
     private struct LayoutMetrics {
