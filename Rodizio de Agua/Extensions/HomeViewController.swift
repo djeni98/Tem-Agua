@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class HomeViewController: ScrollableViewController {
+    private var objectId: Int? = 117
+
     private lazy var waterBalloon: WaterQuestionBalloon = .init()
 
     private lazy var headerView: UIView = {
@@ -63,8 +65,6 @@ class HomeViewController: ScrollableViewController {
 
         let currentRotationButton = createButton(with: "API Current Rotation", action: #selector(requestCurrentWaterRotation))
         contentStackView.addArrangedSubview(currentRotationButton)
-
-        setupRightBalloons()
     }
 
     private func createButton(with title: String, action: Selector) -> UIButton {
@@ -102,18 +102,26 @@ class HomeViewController: ScrollableViewController {
         let y = -2931193.211922049
 
         api.getLocationRelatedInfo(x: x, y: y) { id, polygonCoordinates in
-            print("Id = \(id)")
+            print("Retrieved Id: \(id)")
+            self.objectId = id
+            self.requestCurrentWaterRotation()
         }
 
     }
 
     @objc private func requestCurrentWaterRotation() {
-        let api = APIService()
-        let objectId = 117
+        guard let objectId = objectId else { return }
 
+        let api = APIService()
         api.getCurrentWaterRotation(objectId: objectId) { relatedRecords in
             print("RelatedRecords.count:", relatedRecords.count)
             print(relatedRecords)
+
+            DispatchQueue.main.async {
+                let answerBalloon = AnswerBalloon()
+                answerBalloon.setAnswer(relatedRecords.isEmpty ? "Sim!" : "Não!")
+                self.rightBalloonsContainer.addArrangedSubview(answerBalloon)
+            }
         }
     }
 
