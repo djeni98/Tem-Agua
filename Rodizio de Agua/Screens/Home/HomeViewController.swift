@@ -102,10 +102,25 @@ class HomeViewController: ScrollableViewController {
         // Do any additional setup after loading the view.
     }
 
+    private enum Location {
+        case politecnico, jockeyPlaza, estacao
+
+        func getPoint() -> (x: Double, y: Double) {
+            switch self {
+            case .politecnico:
+                return (x: -49.231733212404365, y: -25.450797458953218)
+            case .jockeyPlaza:
+                return (x: -49.21442003679073, y: -25.42961165831857)
+            case .estacao:
+                return (x: -49.266369974740044, y: -25.437978201876945)
+            }
+        }
+    }
+
     @objc private func requestLocationInfo() {
         let api = APIService()
-        let x = -5480472.128074637
-        let y = -2931193.211922049
+        let location = Location.estacao
+        let (x, y) = location.getPoint()
 
         api.getLocationRelatedInfo(x: x, y: y) { id, polygonCoordinates in
             print("Retrieved Id: \(id)")

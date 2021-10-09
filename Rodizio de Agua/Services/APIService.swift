@@ -87,8 +87,8 @@ class APIService {
         request.resume()
     }
 
-    func getLocationRelatedInfo(x: Double, y: Double, completion: @escaping (Int, [[[Double]]]) -> Void) {
-        let parameters = getParametersForLocationRequest(x: x, y: y)
+    func getLocationRelatedInfo(x: Double, y: Double, wkid: Int = 4326, completion: @escaping (Int, [[[Double]]]) -> Void) {
+        let parameters = getParametersForLocationRequest(x: x, y: y, wkid: wkid)
         guard let url = getURL(from: parameters) else { return }
 
         request(with: url) { dictionary in
@@ -173,18 +173,18 @@ class APIService {
         return relatedRecords
     }
 
-    private func getParametersForLocationRequest(x: Double, y: Double) -> Parameters {
+    private func getParametersForLocationRequest(x: Double, y: Double, wkid: Int = 4326) -> Parameters {
         var params = [
             "f": "geojson",
             "returnGeometry": "true",
             "spatialRel": "esriSpatialRelIntersects",
             "geometryType": "esriGeometryPoint",
-            "inSR": "102100",
+            "inSR": "\(wkid)",
             "outFields": "*",
-            "outSR": "102100",
+            "outSR": "\(wkid)",
         ]
 
-        let spatialReference = #"{"wkid":102100}"#
+        let spatialReference = #"{"wkid":\#(wkid)}"#
         params["geometry"] = #"{"x":\#(x),"y":\#(y),"spatialReference":\#(spatialReference)}"#
 
         var queryItems = [URLQueryItem]()
