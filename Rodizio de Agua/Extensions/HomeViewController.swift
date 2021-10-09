@@ -9,7 +9,10 @@ import UIKit
 import SnapKit
 
 class HomeViewController: ScrollableViewController {
-    private var objectId: Int? = 117
+    private var politecnicoId = 117
+    private var jockeyPlazaId = 135
+
+    private var objectId: Int?
 
     private lazy var waterBalloon: WaterQuestionBalloon = .init()
 
@@ -65,6 +68,9 @@ class HomeViewController: ScrollableViewController {
 
         let currentRotationButton = createButton(with: "API Current Rotation", action: #selector(requestCurrentWaterRotation))
         contentStackView.addArrangedSubview(currentRotationButton)
+
+        let rotation24hoursButton = createButton(with: "API Rotation within 24h", action: #selector(requestWaterRotationWithin24Hours))
+        contentStackView.addArrangedSubview(rotation24hoursButton)
     }
 
     private func createButton(with title: String, action: Selector) -> UIButton {
@@ -110,6 +116,7 @@ class HomeViewController: ScrollableViewController {
     }
 
     @objc private func requestCurrentWaterRotation() {
+        if objectId == nil { objectId = jockeyPlazaId }
         guard let objectId = objectId else { return }
 
         let api = APIService()
@@ -124,7 +131,7 @@ class HomeViewController: ScrollableViewController {
             }
 
             if relatedRecords.isEmpty {
-                // TODO
+                self.requestWaterRotationWithin24Hours()
             } else {
                 guard let currentRotation = WaterRotation.from(relatedRecords.first!) else {
                     print("\(#line): Could not transform dictionary to WaterRotation model")
@@ -141,7 +148,44 @@ class HomeViewController: ScrollableViewController {
                     )
                     self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
                 }
+            }
+        }
+    }
 
+    @objc private func requestWaterRotationWithin24Hours() {
+        guard let objectId = objectId else { return }
+
+        let api = APIService()
+        api.getNewWaterRotationWithin24Hours(objectId: objectId) { relatedRecords in
+            print("24 Hours count:", relatedRecords.count)
+            print(relatedRecords)
+
+            if relatedRecords.isEmpty {
+                DispatchQueue.main.async {
+                    let waterBalloon = WaterRotationBalloon()
+                    waterBalloon.configure(
+                        isNextRotation: false,
+                        rotationInfoText: "Sem rodízio nas próximas 24 horas.",
+                        observationText: nil
+                    )
+                    self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
+                }
+            } else {
+                guard let rotation = WaterRotation.from(relatedRecords.first!) else {
+                    print("\(#line): Could not transform dictionary to WaterRotation model")
+                    return
+                }
+
+                let viewModel = WaterRotationViewModel(model: rotation)
+                DispatchQueue.main.async {
+                    let waterBalloon = WaterRotationBalloon()
+                    waterBalloon.configure(
+                        isNextRotation: false,
+                        rotationInfoText: viewModel.getInfoTextAbout24HoursRotation(),
+                        observationText: rotation.observacao
+                    )
+                    self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
+                }
             }
         }
     }
