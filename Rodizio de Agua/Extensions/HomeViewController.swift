@@ -122,6 +122,27 @@ class HomeViewController: ScrollableViewController {
                 answerBalloon.setAnswer(relatedRecords.isEmpty ? "Sim!" : "Não!")
                 self.rightBalloonsContainer.addArrangedSubview(answerBalloon)
             }
+
+            if relatedRecords.isEmpty {
+                // TODO
+            } else {
+                guard let currentRotation = WaterRotation.from(relatedRecords.first!) else {
+                    print("\(#line): Could not transform dictionary to WaterRotation model")
+                    return
+                }
+
+                let viewModel = WaterRotationViewModel(model: currentRotation)
+                DispatchQueue.main.async {
+                    let waterBalloon = WaterRotationBalloon()
+                    waterBalloon.configure(
+                        isNextRotation: false,
+                        rotationInfoText: viewModel.getInfoTextAboutCurrentRotation(),
+                        observationText: currentRotation.observacao
+                    )
+                    self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
+                }
+
+            }
         }
     }
 

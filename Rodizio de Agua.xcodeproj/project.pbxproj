@@ -13,6 +13,9 @@
 		B72A1434270E3E2D001303BB /* LeftBalloonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A1433270E3E2D001303BB /* LeftBalloonView.swift */; };
 		B72A1439270E542F001303BB /* BalloonsLayoutMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A1438270E542F001303BB /* BalloonsLayoutMetrics.swift */; };
 		B72A143D270E56F8001303BB /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A143C270E56F8001303BB /* UIView+.swift */; };
+		B74B8AEA2710820000102ECB /* WaterRotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B8AE92710820000102ECB /* WaterRotation.swift */; };
+		B74B8AED2710862D00102ECB /* WaterRotationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B8AEC2710862D00102ECB /* WaterRotationViewModel.swift */; };
+		B74B8AEF271089DE00102ECB /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B8AEE271089DE00102ECB /* Date+.swift */; };
 		B775D17A270F096200E9DFB4 /* RightBalloonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D179270F096200E9DFB4 /* RightBalloonView.swift */; };
 		B775D17C270F0B6600E9DFB4 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D17B270F0B6500E9DFB4 /* UIFont+.swift */; };
 		B775D17E270F0B9500E9DFB4 /* WaterQuestionBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D17D270F0B9500E9DFB4 /* WaterQuestionBalloon.swift */; };
@@ -34,6 +37,9 @@
 		B72A1433270E3E2D001303BB /* LeftBalloonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftBalloonView.swift; sourceTree = "<group>"; };
 		B72A1438270E542F001303BB /* BalloonsLayoutMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonsLayoutMetrics.swift; sourceTree = "<group>"; };
 		B72A143C270E56F8001303BB /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		B74B8AE92710820000102ECB /* WaterRotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterRotation.swift; sourceTree = "<group>"; };
+		B74B8AEC2710862D00102ECB /* WaterRotationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterRotationViewModel.swift; sourceTree = "<group>"; };
+		B74B8AEE271089DE00102ECB /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		B775D179270F096200E9DFB4 /* RightBalloonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightBalloonView.swift; sourceTree = "<group>"; };
 		B775D17B270F0B6500E9DFB4 /* UIFont+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		B775D17D270F0B9500E9DFB4 /* WaterQuestionBalloon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterQuestionBalloon.swift; sourceTree = "<group>"; };
@@ -69,6 +75,7 @@
 				B775D17B270F0B6500E9DFB4 /* UIFont+.swift */,
 				B72A141E270E3255001303BB /* UIColor+.swift */,
 				B72A143C270E56F8001303BB /* UIView+.swift */,
+				B74B8AEE271089DE00102ECB /* Date+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -91,6 +98,22 @@
 				B72A1438270E542F001303BB /* BalloonsLayoutMetrics.swift */,
 			);
 			path = Balloons;
+			sourceTree = "<group>";
+		};
+		B74B8AE8271081F300102ECB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B74B8AE92710820000102ECB /* WaterRotation.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B74B8AEB2710861F00102ECB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B74B8AEC2710862D00102ECB /* WaterRotationViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		B775D17F270F0E9A00E9DFB4 /* Screens */ = {
@@ -142,6 +165,8 @@
 				B77E60FD270DCDB700C24620 /* AppDelegate.swift */,
 				B77E60FF270DCDB700C24620 /* SceneDelegate.swift */,
 				B77E6101270DCDB700C24620 /* ViewController.swift */,
+				B74B8AEB2710861F00102ECB /* ViewModel */,
+				B74B8AE8271081F300102ECB /* Model */,
 				B775D18C270F3F4600E9DFB4 /* Services */,
 				B775D17F270F0E9A00E9DFB4 /* Screens */,
 				B72A1422270E3674001303BB /* SharedComponents */,
@@ -230,10 +255,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B775D18B270F24F300E9DFB4 /* WaterRotationBalloon.swift in Sources */,
+				B74B8AEA2710820000102ECB /* WaterRotation.swift in Sources */,
 				B775D17A270F096200E9DFB4 /* RightBalloonView.swift in Sources */,
 				B72A1434270E3E2D001303BB /* LeftBalloonView.swift in Sources */,
 				B775D17E270F0B9500E9DFB4 /* WaterQuestionBalloon.swift in Sources */,
 				B775D17C270F0B6600E9DFB4 /* UIFont+.swift in Sources */,
+				B74B8AED2710862D00102ECB /* WaterRotationViewModel.swift in Sources */,
 				B77E6102270DCDB700C24620 /* ViewController.swift in Sources */,
 				B775D18E270F400F00E9DFB4 /* APIService.swift in Sources */,
 				B775D189270F1DC100E9DFB4 /* ScrollableViewController.swift in Sources */,
@@ -243,6 +270,7 @@
 				B77E6100270DCDB700C24620 /* SceneDelegate.swift in Sources */,
 				B72A1424270E3686001303BB /* GradientBackgroundView.swift in Sources */,
 				B72A143D270E56F8001303BB /* UIView+.swift in Sources */,
+				B74B8AEF271089DE00102ECB /* Date+.swift in Sources */,
 				B775D186270F1C1900E9DFB4 /* HomeViewController.swift in Sources */,
 				B72A1439270E542F001303BB /* BalloonsLayoutMetrics.swift in Sources */,
 			);
