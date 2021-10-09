@@ -16,6 +16,39 @@ class HomeViewController: ScrollableViewController {
 
     private lazy var waterBalloon: WaterQuestionBalloon = .init()
 
+    private var xPoint: Double?
+    private var yPoint: Double?
+
+    private lazy var buttonsContainer: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 4
+        stackView.distribution = .fillProportionally
+        
+        for location in Location.allCases {
+            let uiAction = UIAction() { _ in
+                let point = location.getPoint()
+                self.xPoint = point.x
+                self.yPoint = point.y
+
+                self.requestLocationInfo()
+            }
+
+            let button = UIButton(primaryAction: uiAction)
+            button.setTitle(location.rawValue, for: .normal)
+            button.setTitleColor(.white, for: .normal)
+            button.backgroundColor = .systemBlue
+            button.layer.cornerRadius = 10
+            button.snp.makeConstraints { make in
+                make.height.equalTo(60)
+            }
+
+            stackView.addArrangedSubview(button)
+        }
+
+        return stackView
+    }()
+
     private lazy var headerView: UIView = {
         let view = UIView()
 
@@ -60,30 +93,9 @@ class HomeViewController: ScrollableViewController {
         contentStackView.alignment = .fill
         contentStackView.spacing = 16
 
+        contentStackView.addArrangedSubview(buttonsContainer)
         contentStackView.addArrangedSubview(headerView)
         contentStackView.addArrangedSubview(rightBalloonsContainer)
-
-        let locationButton = createButton(with: "API Location", action: #selector(requestLocationInfo))
-        contentStackView.addArrangedSubview(locationButton)
-
-        let currentRotationButton = createButton(with: "API Current Rotation", action: #selector(requestCurrentWaterRotation))
-        contentStackView.addArrangedSubview(currentRotationButton)
-
-        let rotation24hoursButton = createButton(with: "API Rotation within 24h", action: #selector(requestWaterRotationWithin24Hours))
-        contentStackView.addArrangedSubview(rotation24hoursButton)
-    }
-
-    private func createButton(with title: String, action: Selector) -> UIButton {
-        let button = UIButton()
-        button.setTitle(title, for: .normal)
-        button.addTarget(self, action: action, for: .touchUpInside)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 10
-        button.snp.makeConstraints { make in
-            make.height.equalTo(60)
-        }
-
-        return button
     }
 
     private func setupRightBalloons() {
@@ -102,7 +114,7 @@ class HomeViewController: ScrollableViewController {
         // Do any additional setup after loading the view.
     }
 
-    private enum Location {
+    private enum Location: String, CaseIterable {
         case politecnico, jockeyPlaza, estacao
 
         func getPoint() -> (x: Double, y: Double) {
@@ -118,10 +130,14 @@ class HomeViewController: ScrollableViewController {
     }
 
     @objc private func requestLocationInfo() {
-        let api = APIService()
-        let location = Location.estacao
-        let (x, y) = location.getPoint()
+        guard let x = xPoint, let y = yPoint else { return }
 
+        rightBalloonsContainer.arrangedSubviews.forEach { view in
+            rightBalloonsContainer.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+
+        let api = APIService()
         api.getLocationRelatedInfo(x: x, y: y) { id, polygonCoordinates in
             print("Retrieved Id: \(id)")
             self.objectId = id
