@@ -16,11 +16,11 @@
 		B74B8AEA2710820000102ECB /* WaterRotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B8AE92710820000102ECB /* WaterRotation.swift */; };
 		B74B8AED2710862D00102ECB /* WaterRotationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B8AEC2710862D00102ECB /* WaterRotationViewModel.swift */; };
 		B74B8AEF271089DE00102ECB /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B8AEE271089DE00102ECB /* Date+.swift */; };
+		B7665BA82711D6E40044706B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7665BA72711D6E40044706B /* HomeViewController.swift */; };
 		B775D17A270F096200E9DFB4 /* RightBalloonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D179270F096200E9DFB4 /* RightBalloonView.swift */; };
 		B775D17C270F0B6600E9DFB4 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D17B270F0B6500E9DFB4 /* UIFont+.swift */; };
 		B775D17E270F0B9500E9DFB4 /* WaterQuestionBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D17D270F0B9500E9DFB4 /* WaterQuestionBalloon.swift */; };
 		B775D184270F0FFC00E9DFB4 /* AnswerBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D183270F0FFC00E9DFB4 /* AnswerBalloon.swift */; };
-		B775D186270F1C1900E9DFB4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D185270F1C1900E9DFB4 /* HomeViewController.swift */; };
 		B775D189270F1DC100E9DFB4 /* ScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D188270F1DC100E9DFB4 /* ScrollableViewController.swift */; };
 		B775D18B270F24F300E9DFB4 /* WaterRotationBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D18A270F24F300E9DFB4 /* WaterRotationBalloon.swift */; };
 		B775D18E270F400F00E9DFB4 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D18D270F400F00E9DFB4 /* APIService.swift */; };
@@ -40,11 +40,11 @@
 		B74B8AE92710820000102ECB /* WaterRotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterRotation.swift; sourceTree = "<group>"; };
 		B74B8AEC2710862D00102ECB /* WaterRotationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterRotationViewModel.swift; sourceTree = "<group>"; };
 		B74B8AEE271089DE00102ECB /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		B7665BA72711D6E40044706B /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B775D179270F096200E9DFB4 /* RightBalloonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightBalloonView.swift; sourceTree = "<group>"; };
 		B775D17B270F0B6500E9DFB4 /* UIFont+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		B775D17D270F0B9500E9DFB4 /* WaterQuestionBalloon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterQuestionBalloon.swift; sourceTree = "<group>"; };
 		B775D183270F0FFC00E9DFB4 /* AnswerBalloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnswerBalloon.swift; path = "Rodizio de Agua/Extensions/AnswerBalloon.swift"; sourceTree = SOURCE_ROOT; };
-		B775D185270F1C1900E9DFB4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = "Rodizio de Agua/Extensions/HomeViewController.swift"; sourceTree = SOURCE_ROOT; };
 		B775D188270F1DC100E9DFB4 /* ScrollableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableViewController.swift; sourceTree = "<group>"; };
 		B775D18A270F24F300E9DFB4 /* WaterRotationBalloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterRotationBalloon.swift; sourceTree = "<group>"; };
 		B775D18D270F400F00E9DFB4 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -127,10 +127,10 @@
 		B775D180270F0EA300E9DFB4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				B7665BA72711D6E40044706B /* HomeViewController.swift */,
 				B775D17D270F0B9500E9DFB4 /* WaterQuestionBalloon.swift */,
 				B775D183270F0FFC00E9DFB4 /* AnswerBalloon.swift */,
 				B775D18A270F24F300E9DFB4 /* WaterRotationBalloon.swift */,
-				B775D185270F1C1900E9DFB4 /* HomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -256,6 +256,7 @@
 			files = (
 				B775D18B270F24F300E9DFB4 /* WaterRotationBalloon.swift in Sources */,
 				B74B8AEA2710820000102ECB /* WaterRotation.swift in Sources */,
+				B7665BA82711D6E40044706B /* HomeViewController.swift in Sources */,
 				B775D17A270F096200E9DFB4 /* RightBalloonView.swift in Sources */,
 				B72A1434270E3E2D001303BB /* LeftBalloonView.swift in Sources */,
 				B775D17E270F0B9500E9DFB4 /* WaterQuestionBalloon.swift in Sources */,
@@ -271,7 +272,6 @@
 				B72A1424270E3686001303BB /* GradientBackgroundView.swift in Sources */,
 				B72A143D270E56F8001303BB /* UIView+.swift in Sources */,
 				B74B8AEF271089DE00102ECB /* Date+.swift in Sources */,
-				B775D186270F1C1900E9DFB4 /* HomeViewController.swift in Sources */,
 				B72A1439270E542F001303BB /* BalloonsLayoutMetrics.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
