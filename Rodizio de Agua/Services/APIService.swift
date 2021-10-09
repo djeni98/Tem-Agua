@@ -51,6 +51,9 @@ class APIService {
         urlComponents.path = "\(path)/\(layerNumber)/\(operation)"
         urlComponents.queryItems = parameters.queryItems
 
+        let charset = CharacterSet(charactersIn: "/+/(/)/</>").inverted
+        urlComponents.percentEncodedQuery = urlComponents.percentEncodedQuery?.addingPercentEncoding(withAllowedCharacters: charset)
+
         return urlComponents.url
     }
 
@@ -109,8 +112,23 @@ class APIService {
     }
 
     func getCurrentWaterRotation(objectId: Int, completion: @escaping ([[String: Any]]) -> Void) {
-        var parameters = getParametersForRelationshipRequest(objectId: "\(objectId)", from: .poligonoRodizio, to: .tabelaRodizio)
         let sqlParam = "(CURRENT_TIMESTAMP BETWEEN INICIO AND NORMALIZACAO)"
+        requestRelationship(sqlParam: sqlParam, objectId: objectId, completion: completion)
+    }
+
+    func getNewWaterRotationWithin24Hours(objectId: Int, completion: @escaping ([[String: Any]]) -> Void) {
+        let sqlParam = "(INICIO BETWEEN CURRENT_TIMESTAMP AND CURRENT_TIMESTAMP + 1)"
+        requestRelationship(sqlParam: sqlParam, objectId: objectId, completion: completion)
+    }
+
+    func getNextWaterRotation(objectId: Int, completion: @escaping ([[String: Any]]) -> Void) {
+        let sqlParam = "(INICIO > CURRENT_TIMESTAMP)"
+        requestRelationship(sqlParam: sqlParam, objectId: objectId, completion: completion)
+    }
+
+    private func requestRelationship(sqlParam: String, objectId: Int, completion: @escaping ([[String: Any]]) -> Void) {
+        var parameters = getParametersForRelationshipRequest(objectId: "\(objectId)", from: .poligonoRodizio, to: .tabelaRodizio)
+
         parameters.queryItems.append(
             URLQueryItem(name: "definitionExpression", value: sqlParam)
         )
