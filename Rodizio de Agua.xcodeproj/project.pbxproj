@@ -24,6 +24,10 @@
 		B775D189270F1DC100E9DFB4 /* ScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D188270F1DC100E9DFB4 /* ScrollableViewController.swift */; };
 		B775D18B270F24F300E9DFB4 /* WaterRotationBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D18A270F24F300E9DFB4 /* WaterRotationBalloon.swift */; };
 		B775D18E270F400F00E9DFB4 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775D18D270F400F00E9DFB4 /* APIService.swift */; };
+		B7769A81271349DC001A3973 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7769A80271349DC001A3973 /* CardView.swift */; };
+		B7769A8327134AFB001A3973 /* TitleAndButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7769A8227134AFB001A3973 /* TitleAndButtonView.swift */; };
+		B7769A85271354F7001A3973 /* LocationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7769A84271354F7001A3973 /* LocationCardView.swift */; };
+		B7769A8927135C1D001A3973 /* CoordinateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7769A8827135C1D001A3973 /* CoordinateView.swift */; };
 		B77E60FE270DCDB700C24620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E60FD270DCDB700C24620 /* AppDelegate.swift */; };
 		B77E6100270DCDB700C24620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E60FF270DCDB700C24620 /* SceneDelegate.swift */; };
 		B77E6102270DCDB700C24620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E6101270DCDB700C24620 /* ViewController.swift */; };
@@ -48,6 +52,10 @@
 		B775D188270F1DC100E9DFB4 /* ScrollableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableViewController.swift; sourceTree = "<group>"; };
 		B775D18A270F24F300E9DFB4 /* WaterRotationBalloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterRotationBalloon.swift; sourceTree = "<group>"; };
 		B775D18D270F400F00E9DFB4 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		B7769A80271349DC001A3973 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		B7769A8227134AFB001A3973 /* TitleAndButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndButtonView.swift; sourceTree = "<group>"; };
+		B7769A84271354F7001A3973 /* LocationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCardView.swift; sourceTree = "<group>"; };
+		B7769A8827135C1D001A3973 /* CoordinateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateView.swift; sourceTree = "<group>"; };
 		B77E60FA270DCDB600C24620 /* Rodizio de Agua.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rodizio de Agua.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B77E60FD270DCDB700C24620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B77E60FF270DCDB700C24620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +101,7 @@
 		B72A1437270E541B001303BB /* Balloons */ = {
 			isa = PBXGroup;
 			children = (
+				B7769A80271349DC001A3973 /* CardView.swift */,
 				B72A1433270E3E2D001303BB /* LeftBalloonView.swift */,
 				B775D179270F096200E9DFB4 /* RightBalloonView.swift */,
 				B72A1438270E542F001303BB /* BalloonsLayoutMetrics.swift */,
@@ -119,6 +128,7 @@
 		B775D17F270F0E9A00E9DFB4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				B7EC72B52713163100CECFCF /* Configuration */,
 				B775D180270F0EA300E9DFB4 /* Home */,
 			);
 			path = Screens;
@@ -176,6 +186,16 @@
 				B77E610B270DCDB900C24620 /* Info.plist */,
 			);
 			path = "Rodizio de Agua";
+			sourceTree = "<group>";
+		};
+		B7EC72B52713163100CECFCF /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				B7769A8227134AFB001A3973 /* TitleAndButtonView.swift */,
+				B7769A84271354F7001A3973 /* LocationCardView.swift */,
+				B7769A8827135C1D001A3973 /* CoordinateView.swift */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,12 +275,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B775D18B270F24F300E9DFB4 /* WaterRotationBalloon.swift in Sources */,
+				B7769A85271354F7001A3973 /* LocationCardView.swift in Sources */,
 				B74B8AEA2710820000102ECB /* WaterRotation.swift in Sources */,
 				B7665BA82711D6E40044706B /* HomeViewController.swift in Sources */,
 				B775D17A270F096200E9DFB4 /* RightBalloonView.swift in Sources */,
 				B72A1434270E3E2D001303BB /* LeftBalloonView.swift in Sources */,
+				B7769A8327134AFB001A3973 /* TitleAndButtonView.swift in Sources */,
 				B775D17E270F0B9500E9DFB4 /* WaterQuestionBalloon.swift in Sources */,
 				B775D17C270F0B6600E9DFB4 /* UIFont+.swift in Sources */,
+				B7769A81271349DC001A3973 /* CardView.swift in Sources */,
+				B7769A8927135C1D001A3973 /* CoordinateView.swift in Sources */,
 				B74B8AED2710862D00102ECB /* WaterRotationViewModel.swift in Sources */,
 				B77E6102270DCDB700C24620 /* ViewController.swift in Sources */,
 				B775D18E270F400F00E9DFB4 /* APIService.swift in Sources */,
