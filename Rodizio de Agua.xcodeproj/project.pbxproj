@@ -32,6 +32,7 @@
 		B7769A8D27136400001A3973 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7769A8C27136400001A3973 /* PersistenceService.swift */; };
 		B7769A8F27136E59001A3973 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7769A8E27136E59001A3973 /* ConfigurationViewController.swift */; };
 		B7769A9127136EC3001A3973 /* ScreensLayoutMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7769A9027136EC3001A3973 /* ScreensLayoutMetrics.swift */; };
+		B7769A9427138173001A3973 /* EditLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7769A9327138173001A3973 /* EditLocationViewController.swift */; };
 		B77E60FE270DCDB700C24620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E60FD270DCDB700C24620 /* AppDelegate.swift */; };
 		B77E6100270DCDB700C24620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E60FF270DCDB700C24620 /* SceneDelegate.swift */; };
 		B77E6102270DCDB700C24620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E6101270DCDB700C24620 /* ViewController.swift */; };
@@ -64,6 +65,7 @@
 		B7769A8C27136400001A3973 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		B7769A8E27136E59001A3973 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		B7769A9027136EC3001A3973 /* ScreensLayoutMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensLayoutMetrics.swift; sourceTree = "<group>"; };
+		B7769A9327138173001A3973 /* EditLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocationViewController.swift; sourceTree = "<group>"; };
 		B77E60FA270DCDB600C24620 /* Rodizio de Agua.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rodizio de Agua.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B77E60FD270DCDB700C24620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B77E60FF270DCDB700C24620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				B7769A9027136EC3001A3973 /* ScreensLayoutMetrics.swift */,
+				B7769A9227137E32001A3973 /* EditLocation */,
 				B7EC72B52713163100CECFCF /* Configuration */,
 				B775D180270F0EA300E9DFB4 /* Home */,
 			);
@@ -162,6 +165,14 @@
 				B7769A8C27136400001A3973 /* PersistenceService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		B7769A9227137E32001A3973 /* EditLocation */ = {
+			isa = PBXGroup;
+			children = (
+				B7769A9327138173001A3973 /* EditLocationViewController.swift */,
+			);
+			path = EditLocation;
 			sourceTree = "<group>";
 		};
 		B77E60F1270DCDB600C24620 = {
@@ -304,6 +315,7 @@
 				B77E6102270DCDB700C24620 /* ViewController.swift in Sources */,
 				B775D18E270F400F00E9DFB4 /* APIService.swift in Sources */,
 				B775D189270F1DC100E9DFB4 /* ScrollableViewController.swift in Sources */,
+				B7769A9427138173001A3973 /* EditLocationViewController.swift in Sources */,
 				B7769A8F27136E59001A3973 /* ConfigurationViewController.swift in Sources */,
 				B775D184270F0FFC00E9DFB4 /* AnswerBalloon.swift in Sources */,
 				B72A141F270E3255001303BB /* UIColor+.swift in Sources */,

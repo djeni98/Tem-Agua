@@ -19,17 +19,6 @@ class ConfigurationViewController: ScrollableViewController {
         setupContent()
     }
 
-    override func setupContentStackViewConstraints() {
-        let vertical = ScreensLayoutMetrics.contentStackViewVerticalOffset
-        let horizontal = ScreensLayoutMetrics.contentStackViewHorizontalOffset
-
-        let inset = UIEdgeInsets(top: vertical, left: horizontal, bottom: vertical, right: horizontal)
-        contentStackView.snp.makeConstraints { make in
-            make.edges.equalTo(scrollView).inset(inset)
-            make.width.equalTo(scrollView).offset(-horizontal*2)
-        }
-    }
-
     private func setupContent() {
         contentStackView.alignment = .fill
         contentStackView.spacing = 16

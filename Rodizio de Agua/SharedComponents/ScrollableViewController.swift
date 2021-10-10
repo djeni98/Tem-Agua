@@ -40,9 +40,13 @@ class ScrollableViewController: UIViewController {
     }
 
     internal func setupContentStackViewConstraints() {
+        let vertical = ScreensLayoutMetrics.contentStackViewVerticalOffset
+        let horizontal = ScreensLayoutMetrics.contentStackViewHorizontalOffset
+
+        let inset = UIEdgeInsets(top: vertical, left: horizontal, bottom: vertical, right: horizontal)
         contentStackView.snp.makeConstraints { make in
-            make.edges.equalTo(scrollView)
-            make.width.equalTo(scrollView)
+            make.edges.equalTo(scrollView).inset(inset)
+            make.width.equalTo(scrollView).offset(-horizontal*2)
         }
     }
 }
