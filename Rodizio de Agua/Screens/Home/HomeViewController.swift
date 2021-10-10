@@ -25,9 +25,9 @@ class HomeViewController: ScrollableViewController {
         stackView.spacing = 4
         stackView.distribution = .fillProportionally
         
-        for location in Location.allCases {
+        for location in LocationPoint.examplePoints() {
             let uiAction = UIAction() { _ in
-                let point = location.getPoint()
+                let point = location.toTuple()
                 self.xPoint = point.x
                 self.yPoint = point.y
 
@@ -35,7 +35,7 @@ class HomeViewController: ScrollableViewController {
             }
 
             let button = UIButton(primaryAction: uiAction)
-            button.setTitle(location.rawValue, for: .normal)
+            button.setTitle(location.relatedName, for: .normal)
             button.setTitleColor(.white, for: .normal)
             button.backgroundColor = .systemBlue
             button.layer.cornerRadius = 10
@@ -112,21 +112,6 @@ class HomeViewController: ScrollableViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    }
-
-    private enum Location: String, CaseIterable {
-        case politecnico, jockeyPlaza, estacao
-
-        func getPoint() -> (x: Double, y: Double) {
-            switch self {
-            case .politecnico:
-                return (x: -49.231733212404365, y: -25.450797458953218)
-            case .jockeyPlaza:
-                return (x: -49.21442003679073, y: -25.42961165831857)
-            case .estacao:
-                return (x: -49.266369974740044, y: -25.437978201876945)
-            }
-        }
     }
 
     @objc private func requestLocationInfo() {
