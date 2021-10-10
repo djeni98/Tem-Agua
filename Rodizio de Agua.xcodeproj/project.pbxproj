@@ -30,6 +30,8 @@
 		B7769A8927135C1D001A3973 /* CoordinateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7769A8827135C1D001A3973 /* CoordinateView.swift */; };
 		B7769A8B271361A1001A3973 /* LocationPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7769A8A271361A1001A3973 /* LocationPoint.swift */; };
 		B7769A8D27136400001A3973 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7769A8C27136400001A3973 /* PersistenceService.swift */; };
+		B7769A8F27136E59001A3973 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7769A8E27136E59001A3973 /* ConfigurationViewController.swift */; };
+		B7769A9127136EC3001A3973 /* ScreensLayoutMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7769A9027136EC3001A3973 /* ScreensLayoutMetrics.swift */; };
 		B77E60FE270DCDB700C24620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E60FD270DCDB700C24620 /* AppDelegate.swift */; };
 		B77E6100270DCDB700C24620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E60FF270DCDB700C24620 /* SceneDelegate.swift */; };
 		B77E6102270DCDB700C24620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E6101270DCDB700C24620 /* ViewController.swift */; };
@@ -60,6 +62,8 @@
 		B7769A8827135C1D001A3973 /* CoordinateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateView.swift; sourceTree = "<group>"; };
 		B7769A8A271361A1001A3973 /* LocationPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPoint.swift; sourceTree = "<group>"; };
 		B7769A8C27136400001A3973 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+		B7769A8E27136E59001A3973 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
+		B7769A9027136EC3001A3973 /* ScreensLayoutMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensLayoutMetrics.swift; sourceTree = "<group>"; };
 		B77E60FA270DCDB600C24620 /* Rodizio de Agua.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rodizio de Agua.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B77E60FD270DCDB700C24620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B77E60FF270DCDB700C24620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 		B775D17F270F0E9A00E9DFB4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				B7769A9027136EC3001A3973 /* ScreensLayoutMetrics.swift */,
 				B7EC72B52713163100CECFCF /* Configuration */,
 				B775D180270F0EA300E9DFB4 /* Home */,
 			);
@@ -200,6 +205,7 @@
 				B7769A8227134AFB001A3973 /* TitleAndButtonView.swift */,
 				B7769A84271354F7001A3973 /* LocationCardView.swift */,
 				B7769A8827135C1D001A3973 /* CoordinateView.swift */,
+				B7769A8E27136E59001A3973 /* ConfigurationViewController.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -287,6 +293,7 @@
 				B74B8AEA2710820000102ECB /* WaterRotation.swift in Sources */,
 				B7665BA82711D6E40044706B /* HomeViewController.swift in Sources */,
 				B775D17A270F096200E9DFB4 /* RightBalloonView.swift in Sources */,
+				B7769A9127136EC3001A3973 /* ScreensLayoutMetrics.swift in Sources */,
 				B72A1434270E3E2D001303BB /* LeftBalloonView.swift in Sources */,
 				B7769A8327134AFB001A3973 /* TitleAndButtonView.swift in Sources */,
 				B775D17E270F0B9500E9DFB4 /* WaterQuestionBalloon.swift in Sources */,
@@ -297,6 +304,7 @@
 				B77E6102270DCDB700C24620 /* ViewController.swift in Sources */,
 				B775D18E270F400F00E9DFB4 /* APIService.swift in Sources */,
 				B775D189270F1DC100E9DFB4 /* ScrollableViewController.swift in Sources */,
+				B7769A8F27136E59001A3973 /* ConfigurationViewController.swift in Sources */,
 				B775D184270F0FFC00E9DFB4 /* AnswerBalloon.swift in Sources */,
 				B72A141F270E3255001303BB /* UIColor+.swift in Sources */,
 				B77E60FE270DCDB700C24620 /* AppDelegate.swift in Sources */,

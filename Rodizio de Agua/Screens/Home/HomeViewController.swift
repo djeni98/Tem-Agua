@@ -79,8 +79,8 @@ class HomeViewController: ScrollableViewController {
     }
 
     override func setupContentStackViewConstraints() {
-        let vertical = LayoutMetrics.contentStackViewVerticalOffset
-        let horizontal = LayoutMetrics.contentStackViewHorizontalOffset
+        let vertical = ScreensLayoutMetrics.contentStackViewVerticalOffset
+        let horizontal = ScreensLayoutMetrics.contentStackViewHorizontalOffset
         
         let inset = UIEdgeInsets(top: vertical, left: horizontal, bottom: vertical, right: horizontal)
         contentStackView.snp.makeConstraints { make in
@@ -204,11 +204,6 @@ class HomeViewController: ScrollableViewController {
                 }
             }
         }
-    }
-
-    private struct LayoutMetrics {
-        static let contentStackViewVerticalOffset: CGFloat = 16
-        static let contentStackViewHorizontalOffset: CGFloat = 32
     }
 }
 
