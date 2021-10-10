@@ -30,6 +30,17 @@ struct LocationPoint {
     func toTuple() -> (x: Double, y: Double) {
         return (x: longitude, y: latitude)
     }
+
+    func getObservationText() -> String? {
+        guard let source = source, let obtainedAt = obtainedAt else { return nil }
+
+        switch source {
+        case .geolocalization:
+            return "Obtido por geolocalizacao em \(obtainedAt.toPortugueseText())"
+        case .manually:
+            return "Informado manualmente em \(obtainedAt.toPortugueseText())"
+        }
+    }
 }
 
 extension LocationPoint {

@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 
 class LocationCardView: CardView {
+    private lazy var persistenceService = PersistenceService()
+    private lazy var locationPoint: LocationPoint? = persistenceService.getLocationPoint()
+
     private lazy var container: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -66,7 +69,30 @@ class LocationCardView: CardView {
             make.bottom.equalTo(container).offset(offset)
         }
 
+        configure(with: LocationPoint.examplePoints()[0])
+    }
+
+    func configure(with location: LocationPoint?) {
+        self.locationPoint = location
+
+        container.arrangedSubviews.forEach { view in
+            container.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+
         container.addArrangedSubview(titleAndButton)
+        titleAndButton.buttonText = locationPoint == nil ? "Definir" : "Trocar"
+
+        guard let locationPoint = locationPoint else { return }
+        latitudeView.value = "\(locationPoint.latitude)"
+        longitudeView.value = "\(locationPoint.longitude)"
+
+        container.addArrangedSubview(latitudeView)
+        container.addArrangedSubview(longitudeView)
+
+        guard let observationText = locationPoint.getObservationText() else { return }
+        observationLabel.text = observationText
+        container.addArrangedSubview(observationLabel)
     }
 
     required init?(coder: NSCoder) {
