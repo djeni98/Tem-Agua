@@ -9,6 +9,27 @@ import UIKit
 
 class EditLocationViewController: ScrollableViewController {
 
+    private lazy var geolocationView: GeolocationCardView = {
+        let view = GeolocationCardView()
+        view.toggleAction = { geolocationSelected in
+            self.pointFormView.selected = !geolocationSelected
+        }
+
+        return view
+    }()
+
+    private lazy var orLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title1)
+        label.textColor = .secondaryLabel
+        label.text = "OU"
+        label.textAlignment = .center
+
+        return label
+    }()
+
+    private lazy var pointFormView: PointFormCardView = .init()
+
     override func loadView() {
         super.loadView()
 
@@ -20,6 +41,10 @@ class EditLocationViewController: ScrollableViewController {
     private func setupContent() {
         contentStackView.alignment = .fill
         contentStackView.spacing = 16
+
+        contentStackView.addArrangedSubview(geolocationView)
+        contentStackView.addArrangedSubview(orLabel)
+        contentStackView.addArrangedSubview(pointFormView)
     }
 
     private func setupNavigationBar() {
@@ -39,7 +64,6 @@ class EditLocationViewController: ScrollableViewController {
             target: self,
             action: #selector(doneButtonPressed)
         )
-        rightButton.isEnabled = false
         navigationItem.rightBarButtonItem = rightButton
     }
 
