@@ -42,6 +42,7 @@
 		B78192E327145397004CC365 /* PointFormCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78192E227145397004CC365 /* PointFormCardView.swift */; };
 		B78192E52714548C004CC365 /* BorderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78192E42714548C004CC365 /* BorderedTextField.swift */; };
 		B78192E7271454E9004CC365 /* CoordinateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78192E6271454E9004CC365 /* CoordinateTextField.swift */; };
+		B78192EA27146B64004CC365 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B78192E927146B64004CC365 /* IQKeyboardManagerSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B72A1432270E3D68001303BB /* SnapKit in Frameworks */,
+				B78192EA27146B64004CC365 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +253,7 @@
 			name = "Rodizio de Agua";
 			packageProductDependencies = (
 				B72A1431270E3D68001303BB /* SnapKit */,
+				B78192E927146B64004CC365 /* IQKeyboardManagerSwift */,
 			);
 			productName = "Rodizio de Agua";
 			productReference = B77E60FA270DCDB600C24620 /* Rodizio de Agua.app */;
@@ -282,6 +285,7 @@
 			mainGroup = B77E60F1270DCDB600C24620;
 			packageReferences = (
 				B72A1430270E3D68001303BB /* XCRemoteSwiftPackageReference "SnapKit" */,
+				B78192E827146B64004CC365 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = B77E60FB270DCDB600C24620 /* Products */;
 			projectDirPath = "";
@@ -564,6 +568,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		B78192E827146B64004CC365 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -571,6 +583,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B72A1430270E3D68001303BB /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		B78192E927146B64004CC365 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B78192E827146B64004CC365 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
