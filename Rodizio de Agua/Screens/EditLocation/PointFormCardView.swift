@@ -25,7 +25,7 @@ class PointFormCardView: CardView {
 
     var latitude: Double? {
         get { Double(latitudeTextField.text ?? "") }
-        set { latitudeTextField.text = String(describing: newValue) }
+        set { latitudeTextField.text = newValue == nil ? nil : String(describing: newValue!) }
     }
 
     private lazy var latitudeTextField: CoordinateTextField = {
@@ -37,7 +37,7 @@ class PointFormCardView: CardView {
 
     var longitude: Double? {
         get { Double(longitudeTextField.text ?? "") }
-        set { longitudeTextField.text = String(describing: newValue) }
+        set { longitudeTextField.text = newValue == nil ? nil : String(describing: newValue!) }
     }
 
     private lazy var longitudeTextField: CoordinateTextField = {

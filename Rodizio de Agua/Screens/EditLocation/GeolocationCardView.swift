@@ -9,7 +9,12 @@ import UIKit
 import SnapKit
 
 class GeolocationCardView: CardView {
-    var selected = true
+    var selected = true {
+        didSet {
+            toggle.isOn = selected
+            layer.shadowOpacity = selected ? BalloonsLayoutMetrics.shadowOpacity : 0
+        }
+    }
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -61,8 +66,6 @@ class GeolocationCardView: CardView {
 
     @objc private func toggleSwitch() {
         self.selected = toggle.isOn
-        layer.shadowOpacity = selected ? BalloonsLayoutMetrics.shadowOpacity : 0
-
         toggleAction?(self.selected)
     }
 

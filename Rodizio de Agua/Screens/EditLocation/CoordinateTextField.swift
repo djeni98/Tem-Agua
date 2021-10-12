@@ -33,6 +33,7 @@ class CoordinateTextField: UIView {
         set {
             textField.isEnabled = newValue
             textField.backgroundColor = textField.isEnabled ? .appBackground : .clear
+            textField.textColor = textField.isEnabled ? .label : .secondaryLabel
         }
     }
     
