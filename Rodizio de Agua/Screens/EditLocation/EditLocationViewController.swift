@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import CoreLocation
 
 class EditLocationViewController: ScrollableViewController {
     private lazy var persistence: PersistenceService = .init()
@@ -73,6 +74,8 @@ class EditLocationViewController: ScrollableViewController {
 
 
     var onEditAction: ((LocationPoint) -> Void)?
+
+    private var locationManager: CLLocationManager!
 
     override func loadView() {
         super.loadView()
@@ -153,9 +156,30 @@ class EditLocationViewController: ScrollableViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
+    private func locationServiceDeniedAlert() {
+        let alert = UIAlertController(
+            title: "Sem permissão",
+            message: "Altere as permissões de localizacao do app.",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        self.present(alert, animated: true, completion: nil)
+
+    }
+
     @objc private func doneButtonPressed() {
         if geolocationView.selected {
-            notImplementedAlert()
+            let status = locationManager.authorizationStatus
+
+            if status == .restricted || status == .denied {
+                locationServiceDeniedAlert()
+            } else {
+                // TODO: Start caller spinner
+                locationManager.requestLocation()
+                self.dismiss(animated: true, completion: nil)
+            }
+
             return
         } else {
             guard let latitude = pointFormView.latitude,
@@ -179,6 +203,48 @@ class EditLocationViewController: ScrollableViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+
+        if locationManager.authorizationStatus == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+}
+
+extension EditLocationViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation] ) {
+        if let location = locations.first {
+            // TODO: End caller spinner
+            let latitude = location.coordinate.latitude
+            let longitude = location.coordinate.longitude
+
+            let location = LocationPoint(latitude: latitude, longitude: longitude, relatedName: nil, source: .geolocalization, obtainedAt: Date())
+
+            persistence.saveLocationPoint(location)
+            onEditAction?(location)
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        let alert = UIAlertController(
+            title: "Não foi possível obter sua localização",
+            message: "Tente novamente mais tarde.",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .denied || status == .restricted {
+            self.geolocationView.selected = false
+            if !self.pointFormView.selected {
+                self.pointFormView.selected = true
+                self.contentStackView.addArrangedSubview(self.buttonsContainer)
+            }
+        }
     }
 }
 
