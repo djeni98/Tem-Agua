@@ -56,6 +56,16 @@ class LocationCardView: CardView {
         return label
     }()
 
+    private lazy var loadingView: UIView = {
+        let label = UILabel()
+        label.text = "Carregando..."
+        label.textAlignment = .center
+        label.font = .preferredFont(forTextStyle: .footnote)
+        label.textColor = .secondaryLabel
+
+        return label
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -77,27 +87,48 @@ class LocationCardView: CardView {
         configure(with: persistenceService.getLocationPoint())
     }
 
-    func configure(with location: LocationPoint?) {
-        self.locationPoint = location
-
+    func startEditing(withButtonText buttonText: String = "Trocar") {
         container.arrangedSubviews.forEach { view in
             container.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
 
         container.addArrangedSubview(titleAndButton)
-        titleAndButton.buttonText = locationPoint == nil ? "Definir" : "Trocar"
+        titleAndButton.buttonText = buttonText
+    }
 
-        guard let locationPoint = locationPoint else { return }
-        latitudeView.value = "\(locationPoint.latitude)"
-        longitudeView.value = "\(locationPoint.longitude)"
+    func finishEditing(with location: LocationPoint) {
+        latitudeView.value = "\(location.latitude)"
+        longitudeView.value = "\(location.longitude)"
 
         container.addArrangedSubview(latitudeView)
         container.addArrangedSubview(longitudeView)
 
-        guard let observationText = locationPoint.getObservationText() else { return }
+        guard let observationText = location.getObservationText() else { return }
         observationLabel.text = observationText
         container.addArrangedSubview(observationLabel)
+    }
+
+    func configure(with location: LocationPoint?) {
+        self.locationPoint = location
+
+        startEditing(withButtonText: locationPoint == nil ? "Definir" : "Trocar")
+        guard let locationPoint = locationPoint else { return }
+        finishEditing(with: locationPoint)
+    }
+
+    func startLoadingAnimation() {
+        print("Start loading")
+        container.addArrangedSubview(loadingView)
+        loadingView.snp.makeConstraints { make in
+            make.height.equalTo(100)
+        }
+    }
+
+    func finishLoadingAnimation() {
+        print("End loading")
+        container.removeArrangedSubview(loadingView)
+        loadingView.removeFromSuperview()
     }
 
     required init?(coder: NSCoder) {

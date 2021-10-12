@@ -38,8 +38,13 @@ class ConfigurationViewController: ScrollableViewController {
 
     private func presentEditVC() {
         let editVC = EditLocationViewController()
-        editVC.onEditAction = { location in
-            self.locationCard.configure(with: location)
+        editVC.onStartEditing = {
+            self.locationCard.startEditing()
+            self.locationCard.startLoadingAnimation()
+        }
+        editVC.onFinishEditing = { location in
+            self.locationCard.finishLoadingAnimation()
+            self.locationCard.finishEditing(with: location)
         }
 
         let navController = UINavigationController(rootViewController: editVC)

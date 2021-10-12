@@ -73,7 +73,8 @@ class EditLocationViewController: ScrollableViewController {
     }()
 
 
-    var onEditAction: ((LocationPoint) -> Void)?
+    var onStartEditing: (() -> Void)?
+    var onFinishEditing: ((LocationPoint) -> Void)?
 
     private var locationManager: CLLocationManager!
 
@@ -175,7 +176,7 @@ class EditLocationViewController: ScrollableViewController {
             if status == .restricted || status == .denied {
                 locationServiceDeniedAlert()
             } else {
-                // TODO: Start caller spinner
+                onStartEditing?()
                 locationManager.requestLocation()
                 self.dismiss(animated: true, completion: nil)
             }
@@ -191,8 +192,9 @@ class EditLocationViewController: ScrollableViewController {
 
             let location = LocationPoint(latitude: latitude, longitude: longitude, relatedName: nil, source: .manually, obtainedAt: Date())
 
+            onStartEditing?()
             persistence.saveLocationPoint(location)
-            onEditAction?(location)
+            onFinishEditing?(location)
         }
 
         self.dismiss(animated: true, completion: nil)
@@ -215,14 +217,13 @@ class EditLocationViewController: ScrollableViewController {
 extension EditLocationViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation] ) {
         if let location = locations.first {
-            // TODO: End caller spinner
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
 
             let location = LocationPoint(latitude: latitude, longitude: longitude, relatedName: nil, source: .geolocalization, obtainedAt: Date())
 
             persistence.saveLocationPoint(location)
-            onEditAction?(location)
+            onFinishEditing?(location)
         }
     }
 
