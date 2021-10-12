@@ -36,7 +36,7 @@ struct LocationPoint {
 
         switch source {
         case .geolocalization:
-            return "Obtido por geolocalizacao em \(obtainedAt.toPortugueseText())"
+            return "Obtido por geolocalização em \(obtainedAt.toPortugueseText())"
         case .manually:
             return "Informado manualmente em \(obtainedAt.toPortugueseText())"
         }

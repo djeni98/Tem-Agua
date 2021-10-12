@@ -160,7 +160,7 @@ class EditLocationViewController: ScrollableViewController {
     private func locationServiceDeniedAlert() {
         let alert = UIAlertController(
             title: "Sem permissão",
-            message: "Altere as permissões de localizacao do app.",
+            message: "Altere as permissões de localização do app.",
             preferredStyle: .alert
         )
 
