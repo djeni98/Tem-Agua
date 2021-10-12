@@ -43,6 +43,8 @@
 		B78192E52714548C004CC365 /* BorderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78192E42714548C004CC365 /* BorderedTextField.swift */; };
 		B78192E7271454E9004CC365 /* CoordinateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78192E6271454E9004CC365 /* CoordinateTextField.swift */; };
 		B78192EA27146B64004CC365 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B78192E927146B64004CC365 /* IQKeyboardManagerSwift */; };
+		B78192ED2715D69B004CC365 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78192EC2715D69B004CC365 /* TabBarController.swift */; };
+		B78192EF2715DBD5004CC365 /* UINavigationBar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78192EE2715DBD5004CC365 /* UINavigationBar+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +84,8 @@
 		B78192E227145397004CC365 /* PointFormCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointFormCardView.swift; sourceTree = "<group>"; };
 		B78192E42714548C004CC365 /* BorderedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedTextField.swift; sourceTree = "<group>"; };
 		B78192E6271454E9004CC365 /* CoordinateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateTextField.swift; sourceTree = "<group>"; };
+		B78192EC2715D69B004CC365 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		B78192EE2715DBD5004CC365 /* UINavigationBar+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,7 @@
 		B72A141D270E3240001303BB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B78192EE2715DBD5004CC365 /* UINavigationBar+.swift */,
 				B775D17B270F0B6500E9DFB4 /* UIFont+.swift */,
 				B72A141E270E3255001303BB /* UIColor+.swift */,
 				B72A143C270E56F8001303BB /* UIView+.swift */,
@@ -211,6 +216,7 @@
 				B77E60FD270DCDB700C24620 /* AppDelegate.swift */,
 				B77E60FF270DCDB700C24620 /* SceneDelegate.swift */,
 				B77E6101270DCDB700C24620 /* ViewController.swift */,
+				B78192EC2715D69B004CC365 /* TabBarController.swift */,
 				B74B8AEB2710861F00102ECB /* ViewModel */,
 				B74B8AE8271081F300102ECB /* Model */,
 				B775D18C270F3F4600E9DFB4 /* Services */,
@@ -320,6 +326,7 @@
 				B78192E327145397004CC365 /* PointFormCardView.swift in Sources */,
 				B7769A85271354F7001A3973 /* LocationCardView.swift in Sources */,
 				B74B8AEA2710820000102ECB /* WaterRotation.swift in Sources */,
+				B78192EF2715DBD5004CC365 /* UINavigationBar+.swift in Sources */,
 				B7665BA82711D6E40044706B /* HomeViewController.swift in Sources */,
 				B775D17A270F096200E9DFB4 /* RightBalloonView.swift in Sources */,
 				B7769A9127136EC3001A3973 /* ScreensLayoutMetrics.swift in Sources */,
@@ -337,6 +344,7 @@
 				B7769A9427138173001A3973 /* EditLocationViewController.swift in Sources */,
 				B7769A8F27136E59001A3973 /* ConfigurationViewController.swift in Sources */,
 				B775D184270F0FFC00E9DFB4 /* AnswerBalloon.swift in Sources */,
+				B78192ED2715D69B004CC365 /* TabBarController.swift in Sources */,
 				B72A141F270E3255001303BB /* UIColor+.swift in Sources */,
 				B77E60FE270DCDB700C24620 /* AppDelegate.swift in Sources */,
 				B77E6100270DCDB700C24620 /* SceneDelegate.swift in Sources */,
