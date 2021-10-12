@@ -9,8 +9,7 @@ import UIKit
 import SnapKit
 
 class HomeViewController: ScrollableViewController {
-    private var politecnicoId = 117
-    private var jockeyPlazaId = 135
+    private lazy var persistence: PersistenceService = .init()
 
     private var objectId: Int?
 
@@ -87,20 +86,30 @@ class HomeViewController: ScrollableViewController {
         contentStackView.addArrangedSubview(rightBalloonsContainer)
     }
 
-    private func setupRightBalloons() {
-        let answerBalloon = AnswerBalloon()
-        rightBalloonsContainer.addArrangedSubview(answerBalloon)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
-        let rotationBalloon = WaterRotationBalloon()
-        // rotationBalloon.configure(isNextRotation: true, rotationInfoText: "Teste")
-        rightBalloonsContainer.addArrangedSubview(rotationBalloon)
-
+        startRequests()
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private func startRequests() {
+        if let location = persistence.getLocationPoint() {
+            let point = location.toTuple()
 
-        // Do any additional setup after loading the view.
+            if let xPoint = xPoint, let yPoint = yPoint,
+                xPoint == point.x, yPoint == point.y {
+                // Same location
+                return
+            }
+
+            xPoint = point.x
+            yPoint = point.y
+
+            requestLocationInfo()
+        } else {
+            // TODO: let user inform location here
+            print("Location not informed")
+        }
     }
 
     @objc private func requestLocationInfo() {
@@ -121,7 +130,6 @@ class HomeViewController: ScrollableViewController {
     }
 
     @objc private func requestCurrentWaterRotation() {
-        if objectId == nil { objectId = jockeyPlazaId }
         guard let objectId = objectId else { return }
 
         let api = APIService()
