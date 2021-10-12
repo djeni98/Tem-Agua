@@ -43,6 +43,7 @@ class TitleAndButtonView: UIView {
         button.setTitle("Button", for: .normal)
         button.setTitleColor(UIColor.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
         return button
     }()

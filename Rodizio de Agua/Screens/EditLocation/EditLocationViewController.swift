@@ -31,7 +31,7 @@ class EditLocationViewController: ScrollableViewController {
 
     private lazy var pointFormView: PointFormCardView = .init()
 
-    var onEditAction: (() -> Void)?
+    var onEditAction: ((LocationPoint) -> Void)?
 
     override func loadView() {
         super.loadView()
@@ -124,7 +124,7 @@ class EditLocationViewController: ScrollableViewController {
             let location = LocationPoint(latitude: latitude, longitude: longitude, relatedName: nil, source: .manually, obtainedAt: Date())
 
             persistence.saveLocationPoint(location)
-            onEditAction?()
+            onEditAction?(location)
         }
 
         self.dismiss(animated: true, completion: nil)

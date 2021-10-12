@@ -10,7 +10,9 @@ import SnapKit
 
 class LocationCardView: CardView {
     private lazy var persistenceService = PersistenceService()
-    private lazy var locationPoint: LocationPoint? = persistenceService.getLocationPoint()
+    private var locationPoint: LocationPoint?
+
+    var editButtonAction: (() -> Void)?
 
     private lazy var container: UIStackView = {
         let stackView = UIStackView()
@@ -24,6 +26,9 @@ class LocationCardView: CardView {
         let view = TitleAndButtonView()
         view.title = "Localização"
         view.buttonText = "Definir"
+        view.action = {
+            self.editButtonAction?()
+        }
 
         return view
     }()
@@ -69,7 +74,7 @@ class LocationCardView: CardView {
             make.bottom.equalTo(container).offset(offset)
         }
 
-        configure(with: LocationPoint.examplePoints()[0])
+        configure(with: persistenceService.getLocationPoint())
     }
 
     func configure(with location: LocationPoint?) {

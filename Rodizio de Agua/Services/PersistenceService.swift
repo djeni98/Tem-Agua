@@ -33,7 +33,7 @@ class PersistenceService {
         defaults.set(locationPoint.latitude, forKey: "latitude")
         defaults.set(locationPoint.longitude, forKey: "longitude")
         defaults.set(locationPoint.relatedName, forKey: "relatedName")
-        defaults.set(locationPoint.source?.rawValue ?? -1, forKey: "relatedName")
+        defaults.set(locationPoint.source?.rawValue ?? -1, forKey: "source")
         defaults.set(locationPoint.obtainedAt, forKey: "obtainedAt")
     }
 

@@ -9,8 +9,12 @@ import UIKit
 import SnapKit
 
 class ConfigurationViewController: ScrollableViewController {
+    private lazy var locationCard: LocationCardView = {
+        let card = LocationCardView()
+        card.editButtonAction = presentEditVC
 
-    private lazy var locationCard: LocationCardView = .init()
+        return card
+    }()
 
     override func loadView() {
         super.loadView()
@@ -30,6 +34,16 @@ class ConfigurationViewController: ScrollableViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+
+    private func presentEditVC() {
+        let editVC = EditLocationViewController()
+        editVC.onEditAction = { location in
+            self.locationCard.configure(with: location)
+        }
+
+        let navController = UINavigationController(rootViewController: editVC)
+        self.present(navController, animated: true, completion: nil)
     }
 }
 
