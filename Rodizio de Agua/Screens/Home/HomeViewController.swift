@@ -18,36 +18,6 @@ class HomeViewController: ScrollableViewController {
     private var xPoint: Double?
     private var yPoint: Double?
 
-    private lazy var buttonsContainer: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 4
-        stackView.distribution = .fillProportionally
-        
-        for location in LocationPoint.examplePoints() {
-            let uiAction = UIAction() { _ in
-                let point = location.toTuple()
-                self.xPoint = point.x
-                self.yPoint = point.y
-
-                self.requestLocationInfo()
-            }
-
-            let button = UIButton(primaryAction: uiAction)
-            button.setTitle(location.relatedName, for: .normal)
-            button.setTitleColor(.white, for: .normal)
-            button.backgroundColor = .systemBlue
-            button.layer.cornerRadius = 10
-            button.snp.makeConstraints { make in
-                make.height.equalTo(60)
-            }
-
-            stackView.addArrangedSubview(button)
-        }
-
-        return stackView
-    }()
-
     private lazy var headerView: UIView = {
         let view = UIView()
 
@@ -81,7 +51,6 @@ class HomeViewController: ScrollableViewController {
         contentStackView.alignment = .fill
         contentStackView.spacing = 16
 
-        contentStackView.addArrangedSubview(buttonsContainer)
         contentStackView.addArrangedSubview(headerView)
         contentStackView.addArrangedSubview(rightBalloonsContainer)
     }

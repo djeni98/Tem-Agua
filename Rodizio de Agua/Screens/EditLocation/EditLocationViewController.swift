@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class EditLocationViewController: ScrollableViewController {
     private lazy var persistence: PersistenceService = .init()
@@ -14,6 +15,12 @@ class EditLocationViewController: ScrollableViewController {
         let view = GeolocationCardView()
         view.toggleAction = { geolocationSelected in
             self.pointFormView.selected = !geolocationSelected
+            if self.pointFormView.selected {
+                self.contentStackView.addArrangedSubview(self.buttonsContainer)
+            } else {
+                self.contentStackView.removeArrangedSubview(self.buttonsContainer)
+                self.buttonsContainer.removeFromSuperview()
+            }
         }
 
         return view
@@ -30,6 +37,40 @@ class EditLocationViewController: ScrollableViewController {
     }()
 
     private lazy var pointFormView: PointFormCardView = .init()
+
+    private lazy var buttonsContainer: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 4
+        stackView.distribution = .fillProportionally
+
+        for (index, location) in LocationPoint.examplePoints().enumerated() {
+            let uiAction = UIAction() { _ in
+                self.pointFormView.latitude = location.latitude
+                self.pointFormView.longitude = location.longitude
+            }
+
+            let button = UIButton(primaryAction: uiAction)
+            let relatedName = location.relatedName!
+
+            let title = "\(relatedName)\n(Grupo \(index + 1))"
+            button.setTitle(title, for: .normal)
+            button.titleLabel?.lineBreakMode = .byWordWrapping
+            button.titleLabel?.textAlignment = .center
+
+            button.setTitleColor(.white, for: .normal)
+            button.backgroundColor = .systemBlue
+            button.layer.cornerRadius = 10
+            button.snp.makeConstraints { make in
+                make.height.equalTo(60)
+            }
+
+            stackView.addArrangedSubview(button)
+        }
+
+        return stackView
+    }()
+
 
     var onEditAction: ((LocationPoint) -> Void)?
 
@@ -57,7 +98,8 @@ class EditLocationViewController: ScrollableViewController {
 
         navigationItem.title = "Localização"
         let leftButton = UIBarButtonItem(
-            barButtonSystemItem: .cancel,
+            title: "Cancelar",
+            style: .plain,
             target: self,
             action: #selector(cancelButtonPressed)
         )
@@ -80,6 +122,8 @@ class EditLocationViewController: ScrollableViewController {
             pointFormView.selected = true
             pointFormView.latitude = locationPoint.latitude
             pointFormView.longitude = locationPoint.longitude
+
+            contentStackView.addArrangedSubview(buttonsContainer)
         }
     }
 

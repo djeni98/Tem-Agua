@@ -45,27 +45,27 @@ struct LocationPoint {
 
 extension LocationPoint {
     static func examplePoints() -> [LocationPoint] {
-        let politecnico = LocationPoint(
-            latitude: -25.450797458953218,
-            longitude: -49.231733212404365,
-            relatedName: "Politécnico",
-            source: .manually
-        )
-
-        let jockeyPlaza = LocationPoint(
+        let group1 = LocationPoint(
             latitude: -25.42961165831857,
             longitude: -49.21442003679073,
             relatedName: "Jockey Plaza",
             source: .manually
         )
 
-        let estacao = LocationPoint(
+        let group2 = LocationPoint(
+            latitude: -25.450797458953218,
+            longitude: -49.231733212404365,
+            relatedName: "Politécnico",
+            source: .manually
+        )
+
+        let group3 = LocationPoint(
             latitude: -25.437978201876945,
             longitude: -49.266369974740044,
             relatedName: "Estação",
             source: .manually
         )
 
-        return [politecnico, jockeyPlaza, estacao]
+        return [group1, group2, group3]
     }
 }
