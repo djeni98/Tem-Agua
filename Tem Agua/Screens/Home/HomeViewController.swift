@@ -77,6 +77,11 @@ class HomeViewController: ScrollableViewController {
             requestLocationInfo()
         } else {
             // TODO: let user inform location here
+            rightBalloonsContainer.arrangedSubviews.forEach { view in
+                rightBalloonsContainer.removeArrangedSubview(view)
+                view.removeFromSuperview()
+            }
+
             let balloon = SimpleRightBalloon()
             var text = "A localização não foi informada."
 
