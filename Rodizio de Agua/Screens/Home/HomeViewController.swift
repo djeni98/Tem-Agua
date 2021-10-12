@@ -77,8 +77,22 @@ class HomeViewController: ScrollableViewController {
             requestLocationInfo()
         } else {
             // TODO: let user inform location here
-            print("Location not informed")
+            let balloon = SimpleRightBalloon()
+            var text = "A localização não foi informada."
+
+            text += "\n\n" + "Para obter uma resposta, use a geolocalização ou informe as coordenadas manualmente nas configurações."
+
+
+            balloon.text = text
+            rightBalloonsContainer.addArrangedSubview(balloon)
         }
+    }
+
+    private func showErrorAlert(title: String = "Um erro ocorreu", message: String? = "Tente novamente mais tarde.") {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
     }
 
     @objc private func requestLocationInfo() {
@@ -90,8 +104,24 @@ class HomeViewController: ScrollableViewController {
         }
 
         let api = APIService()
-        api.getLocationRelatedInfo(x: x, y: y) { id, polygonCoordinates in
-            print("Retrieved Id: \(id)")
+        api.getLocationRelatedInfo(x: x, y: y) { id, polygonCoordinates, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    switch error {
+                    case .dataExtractionFailure(_):
+                        self.showErrorAlert(title: "Localização informada sem resultados.", message: nil)
+                    default:
+                        self.showErrorAlert()
+                    }
+
+                    let balloon = SimpleRightBalloon()
+                    balloon.text = "Verifique se a localização informada está na região metropolitana de Curitiba."
+                    self.rightBalloonsContainer.addArrangedSubview(balloon)
+                }
+
+                return
+            }
+
             self.objectId = id
             self.requestCurrentWaterRotation()
         }
@@ -102,7 +132,19 @@ class HomeViewController: ScrollableViewController {
         guard let objectId = objectId else { return }
 
         let api = APIService()
-        api.getCurrentWaterRotation(objectId: objectId) { relatedRecords in
+        api.getCurrentWaterRotation(objectId: objectId) { relatedRecords, error in
+            if let _ = error {
+                DispatchQueue.main.async {
+                    let balloon = SimpleRightBalloon()
+                    balloon.text = "Tente novamente mais tarde."
+                    self.rightBalloonsContainer.addArrangedSubview(balloon)
+                }
+
+                return
+            }
+
+            guard let relatedRecords = relatedRecords else { return }
+
             print("RelatedRecords.count:", relatedRecords.count)
             print(relatedRecords)
 
@@ -138,7 +180,17 @@ class HomeViewController: ScrollableViewController {
         guard let objectId = objectId else { return }
 
         let api = APIService()
-        api.getNewWaterRotationWithin24Hours(objectId: objectId) { relatedRecords in
+        api.getNewWaterRotationWithin24Hours(objectId: objectId) { relatedRecords, error in
+            if let _ = error {
+                DispatchQueue.main.async {
+                    self.showErrorAlert()
+                }
+
+                return
+            }
+
+            guard let relatedRecords = relatedRecords else { return }
+
             print("24 Hours count:", relatedRecords.count)
             print(relatedRecords)
 

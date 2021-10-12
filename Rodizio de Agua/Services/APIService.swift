@@ -57,45 +57,71 @@ class APIService {
         return urlComponents.url
     }
 
-    private func request(with url: URL, completion: @escaping ([String: Any]) -> Void) {
+    private func request(with url: URL, completion: @escaping ([String: Any]?, APIError?) -> Void) {
         let request = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let _ = error {
+            if let error = error {
                 print("\(#line): Server Error")
+
+                completion(nil, .serverError(error))
                 return
             }
 
             guard let data = data else {
                 print("\(#line): Data not available")
+
+                completion(nil, .dataNotAvailable)
                 return
             }
-            let json = try? JSONSerialization.jsonObject(with: data, options: [])
+
+            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else {
+                print("\(#line): Could not get json from data")
+                print(data)
+
+                completion(nil, .jsonSerializationError)
+                return
+            }
 
             guard let dictionary = json as? [String: Any] else {
                 print("\(#line): Could not transform json to dictionary.")
+                print(json)
+
+                completion(nil, .dictionaryConversionError)
                 return
             }
 
             if dictionary.keys.contains("error") {
                 print("\(#line): API Error")
                 print(dictionary["error"]!)
+
+                completion(nil, .apiError(dictionary))
                 return
             }
 
-            completion(dictionary)
+            completion(dictionary, nil)
         }
 
         request.resume()
     }
 
-    func getLocationRelatedInfo(x: Double, y: Double, wkid: Int = 4326, completion: @escaping (Int, [[[Double]]]) -> Void) {
+    func getLocationRelatedInfo(x: Double, y: Double, wkid: Int = 4326, completion: @escaping (Int?, [[[Double]]]?, APIError?) -> Void) {
         let parameters = getParametersForLocationRequest(x: x, y: y, wkid: wkid)
         guard let url = getURL(from: parameters) else { return }
 
-        request(with: url) { dictionary in
+        request(with: url) { dictionary, error in
+            if let error = error {
+                completion(nil, nil, error)
+                return
+            }
+
+            guard let dictionary = dictionary else { return }
+
             guard let features = dictionary["features"] as? [[String: Any]],
                   let feature = features.first
             else {
                 print("\(#line): Could not extract feature from dictionary.")
+                print(dictionary)
+
+                completion(nil, nil, .dataExtractionFailure(.feature))
                 return
             }
 
@@ -104,29 +130,31 @@ class APIService {
                   let coordinates = geometry["coordinates"] as? [[[Double]]]
             else {
                 print("\(#line): Could not extract id and polygon coordinates from feature.")
+
+                completion(nil, nil, .dataExtractionFailure(.objectId))
                 return
             }
 
-            completion(id, coordinates)
+            completion(id, coordinates, nil)
         }
     }
 
-    func getCurrentWaterRotation(objectId: Int, completion: @escaping ([[String: Any]]) -> Void) {
+    func getCurrentWaterRotation(objectId: Int, completion: @escaping ([[String: Any]]?, APIError?) -> Void) {
         let sqlParam = "(CURRENT_TIMESTAMP BETWEEN INICIO AND NORMALIZACAO)"
         requestRelationship(sqlParam: sqlParam, objectId: objectId, completion: completion)
     }
 
-    func getNewWaterRotationWithin24Hours(objectId: Int, completion: @escaping ([[String: Any]]) -> Void) {
+    func getNewWaterRotationWithin24Hours(objectId: Int, completion: @escaping ([[String: Any]]?, APIError?) -> Void) {
         let sqlParam = "(INICIO BETWEEN CURRENT_TIMESTAMP AND CURRENT_TIMESTAMP + 1)"
         requestRelationship(sqlParam: sqlParam, objectId: objectId, completion: completion)
     }
 
-    func getNextWaterRotation(objectId: Int, completion: @escaping ([[String: Any]]) -> Void) {
+    func getNextWaterRotation(objectId: Int, completion: @escaping ([[String: Any]]?, APIError?) -> Void) {
         let sqlParam = "(INICIO > CURRENT_TIMESTAMP)"
         requestRelationship(sqlParam: sqlParam, objectId: objectId, completion: completion)
     }
 
-    private func requestRelationship(sqlParam: String, objectId: Int, completion: @escaping ([[String: Any]]) -> Void) {
+    private func requestRelationship(sqlParam: String, objectId: Int, completion: @escaping ([[String: Any]]?, APIError?) -> Void) {
         var parameters = getParametersForRelationshipRequest(objectId: "\(objectId)", from: .poligonoRodizio, to: .tabelaRodizio)
 
         parameters.queryItems.append(
@@ -135,13 +163,21 @@ class APIService {
 
         guard let url = getURL(from: parameters) else { return }
 
-        request(with: url) { dictionary in
-            guard let relatedRecords = self.getRelatedRecords(from: dictionary) else {
-                print("\(#line): Could not extract related records from dictionary.")
+        request(with: url) { dictionary, error in
+            if let error = error {
+                completion(nil, error)
                 return
             }
 
-            completion(relatedRecords)
+            guard let dictionary = dictionary else { return }
+            guard let relatedRecords = self.getRelatedRecords(from: dictionary) else {
+                print("\(#line): Could not extract related records from dictionary.")
+
+                completion(nil, .dataExtractionFailure(.relatedGroups))
+                return
+            }
+
+            completion(relatedRecords, nil)
         }
     }
 

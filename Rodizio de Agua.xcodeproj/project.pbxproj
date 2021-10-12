@@ -45,6 +45,8 @@
 		B78192EA27146B64004CC365 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B78192E927146B64004CC365 /* IQKeyboardManagerSwift */; };
 		B78192ED2715D69B004CC365 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78192EC2715D69B004CC365 /* TabBarController.swift */; };
 		B78192EF2715DBD5004CC365 /* UINavigationBar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78192EE2715DBD5004CC365 /* UINavigationBar+.swift */; };
+		B78192F12715E78C004CC365 /* SimpleRightBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78192F02715E78C004CC365 /* SimpleRightBalloon.swift */; };
+		B78192F32715ECB2004CC365 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78192F22715ECB2004CC365 /* APIError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +88,8 @@
 		B78192E6271454E9004CC365 /* CoordinateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateTextField.swift; sourceTree = "<group>"; };
 		B78192EC2715D69B004CC365 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		B78192EE2715DBD5004CC365 /* UINavigationBar+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+.swift"; sourceTree = "<group>"; };
+		B78192F02715E78C004CC365 /* SimpleRightBalloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRightBalloon.swift; sourceTree = "<group>"; };
+		B78192F22715ECB2004CC365 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				B74B8AE92710820000102ECB /* WaterRotation.swift */,
+				B78192F22715ECB2004CC365 /* APIError.swift */,
 				B7769A8A271361A1001A3973 /* LocationPoint.swift */,
 			);
 			path = Model;
@@ -170,6 +175,7 @@
 				B775D17D270F0B9500E9DFB4 /* WaterQuestionBalloon.swift */,
 				B775D183270F0FFC00E9DFB4 /* AnswerBalloon.swift */,
 				B775D18A270F24F300E9DFB4 /* WaterRotationBalloon.swift */,
+				B78192F02715E78C004CC365 /* SimpleRightBalloon.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -336,8 +342,10 @@
 				B775D17C270F0B6600E9DFB4 /* UIFont+.swift in Sources */,
 				B7769A962713848B001A3973 /* GeolocationCardView.swift in Sources */,
 				B7769A81271349DC001A3973 /* CardView.swift in Sources */,
+				B78192F32715ECB2004CC365 /* APIError.swift in Sources */,
 				B7769A8927135C1D001A3973 /* CoordinateView.swift in Sources */,
 				B74B8AED2710862D00102ECB /* WaterRotationViewModel.swift in Sources */,
+				B78192F12715E78C004CC365 /* SimpleRightBalloon.swift in Sources */,
 				B77E6102270DCDB700C24620 /* ViewController.swift in Sources */,
 				B775D18E270F400F00E9DFB4 /* APIService.swift in Sources */,
 				B775D189270F1DC100E9DFB4 /* ScrollableViewController.swift in Sources */,
