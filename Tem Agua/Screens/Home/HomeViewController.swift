@@ -26,6 +26,7 @@ class HomeViewController: ScrollableViewController {
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.bottom.equalToSuperview()
+            make.trailing.lessThanOrEqualToSuperview()
         }
 
         return view

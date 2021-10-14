@@ -62,7 +62,7 @@ class AnswerBalloon: RightBalloonView {
     }
 
     private struct LayoutMetrics {
-        static let horizontalOffset: CGFloat = 64
+        static let horizontalOffset: CGFloat = 64 - 12
         static let verticalOffset: CGFloat = 8
     }
 }
