@@ -19,6 +19,7 @@ class PointFormCardView: CardView {
         label.text = "Inserir manualmente"
         label.font = .preferredFont(forTextStyle: .body)
         label.textColor = .label
+        label.numberOfLines = 0
 
         return label
     }()

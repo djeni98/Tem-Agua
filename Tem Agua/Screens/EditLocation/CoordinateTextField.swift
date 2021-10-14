@@ -39,6 +39,7 @@ class CoordinateTextField: UIView {
     
     private lazy var textField: BorderedTextField = {
         let textField = BorderedTextField.get()
+        textField.font = .preferredFont(forTextStyle: .body)
         // textField.keyboardType = .numberPad
 
         return textField

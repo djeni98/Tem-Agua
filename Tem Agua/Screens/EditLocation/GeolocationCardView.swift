@@ -20,6 +20,7 @@ class GeolocationCardView: CardView {
         let label = UILabel()
         label.text = "Usar geolocalização"
         label.font = .preferredFont(forTextStyle: .body)
+        label.numberOfLines = 0
 
         return label
     }()
@@ -30,6 +31,8 @@ class GeolocationCardView: CardView {
         let toggle = UISwitch()
         toggle.isOn = selected
         toggle.addTarget(self, action: #selector(toggleSwitch), for: .valueChanged)
+        toggle.setContentCompressionResistancePriority(.required, for: .horizontal)
+        toggle.setContentCompressionResistancePriority(.required, for: .vertical)
 
         return toggle
     }()
@@ -41,6 +44,7 @@ class GeolocationCardView: CardView {
 
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(toggle)
+        stackView.alignment = .center
 
         return stackView
     }()
