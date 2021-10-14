@@ -21,6 +21,8 @@ class CoordinateView: UIView {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .footnote)
         label.text = "Title"
+        label.numberOfLines = 0
+
         return label
     }()
 
@@ -28,6 +30,8 @@ class CoordinateView: UIView {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
         label.text = "Value"
+        label.numberOfLines = 0
+
         return label
     }()
 

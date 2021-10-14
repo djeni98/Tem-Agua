@@ -52,6 +52,7 @@ class LocationCardView: CardView {
         label.font = .preferredFont(forTextStyle: .caption1)
         label.textColor = .secondaryLabel
         label.text = "Não definido"
+        label.numberOfLines = 0
 
         return label
     }()

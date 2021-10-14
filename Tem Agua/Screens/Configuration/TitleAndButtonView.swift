@@ -34,6 +34,7 @@ class TitleAndButtonView: UIView {
         let label = UILabel()
         label.text = "Title"
         label.font = .preferredFont(forTextStyle: .title1).bold()
+        label.numberOfLines = 0
 
         return label
     }()
@@ -44,6 +45,7 @@ class TitleAndButtonView: UIView {
         button.setTitleColor(UIColor.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .body)
 
         return button
     }()
