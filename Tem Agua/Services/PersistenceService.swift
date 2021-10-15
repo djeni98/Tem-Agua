@@ -42,4 +42,12 @@ class PersistenceService {
             defaults.removeObject(forKey: key)
         }
     }
+
+    func getLastSearchDate() -> Date? {
+        return defaults.object(forKey: "lastSearchDate") as? Date
+    }
+
+    func saveLastSearchDate(_ date: Date) {
+        defaults.set(date, forKey: "lastSearchDate")
+    }
 }

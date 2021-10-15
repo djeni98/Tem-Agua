@@ -32,12 +32,21 @@ class WaterRotationBalloon: RightBalloonView {
     private lazy var observationLabel: UILabel = {
         let label = UILabel()
         label.text = Array(1...10).reduce("", { $0 + "\($1)" })
-        label.font = .preferredFont(forTextStyle: .caption2)
+        label.font = .preferredFont(forTextStyle: .footnote)
+        label.textColor = .label
+        label.numberOfLines = 0
+
+        return label
+    }()
+
+    private lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.text = Array(1...10).reduce("", { $0 + "\($1)" })
+        label.font = .preferredFont(forTextStyle: .caption1)
         label.textColor = .secondaryLabel
         label.numberOfLines = 0
 
         return label
-
     }()
 
     private lazy var containerStackView: UIStackView = {
@@ -87,9 +96,13 @@ class WaterRotationBalloon: RightBalloonView {
         rotationInfoLabel.text = rotationInfoText
         containerStackView.addArrangedSubview(rotationInfoLabel)
 
-        guard let observationText = observationText else { return }
-        observationLabel.text = observationText
-        containerStackView.addArrangedSubview(observationLabel)
+        if let observation = observationText, !observation.isEmpty {
+            observationLabel.text = observation
+            containerStackView.addArrangedSubview(observationLabel)
+        }
+
+        dateLabel.text = "Pesquisa feita em \(Date().toPortugueseText())"
+        containerStackView.addArrangedSubview(dateLabel)
     }
 
     required init?(coder: NSCoder) {

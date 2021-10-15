@@ -62,20 +62,31 @@ class HomeViewController: ScrollableViewController {
         startRequests()
     }
 
+    private func isSameLocation(_ point: (x: Double, y: Double)) -> Bool {
+        if let xPoint = xPoint, let yPoint = yPoint,
+           xPoint == point.x, yPoint == point.y {
+            return true
+        }
+        return false
+    }
+
+    private func didTimeout() -> Bool {
+        guard let lastSearch = persistence.getLastSearchDate() else { return true }
+        let timeoutTime: TimeInterval = 60 * 60
+        return Date() > (lastSearch + timeoutTime)
+    }
+
     private func startRequests() {
         if let location = persistence.getLocationPoint() {
             let point = location.toTuple()
 
-            if let xPoint = xPoint, let yPoint = yPoint,
-                xPoint == point.x, yPoint == point.y {
-                // Same location
-                return
-            }
+            if isSameLocation(point) && !didTimeout() { return }
 
             xPoint = point.x
             yPoint = point.y
 
             requestLocationInfo()
+            persistence.saveLastSearchDate(Date())
         } else {
             // TODO: let user inform location here
             rightBalloonsContainer.arrangedSubviews.forEach { view in
