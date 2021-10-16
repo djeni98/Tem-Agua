@@ -34,6 +34,9 @@ class GeolocationCardView: CardView {
         toggle.setContentCompressionResistancePriority(.required, for: .horizontal)
         toggle.setContentCompressionResistancePriority(.required, for: .vertical)
 
+        toggle.setContentHuggingPriority(.required, for: .horizontal)
+        toggle.setContentHuggingPriority(.required, for: .vertical)
+
         return toggle
     }()
 

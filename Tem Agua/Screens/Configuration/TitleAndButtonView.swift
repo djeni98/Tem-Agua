@@ -44,8 +44,12 @@ class TitleAndButtonView: UIView {
         button.setTitle("Button", for: .normal)
         button.setTitleColor(UIColor.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        button.setContentHuggingPriority(.required, for: .horizontal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
+
+        button.snp.makeConstraints { make in
+            make.height.greaterThanOrEqualTo(44)
+        }
 
         return button
     }()
