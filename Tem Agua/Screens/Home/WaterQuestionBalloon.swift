@@ -14,6 +14,7 @@ class WaterQuestionBalloon: LeftBalloonView {
         label.text = "Tem Água?"
         label.textColor = .white
         label.font = .preferredFont(forTextStyle: .largeTitle).rounded().bold()
+        label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
 
         return label

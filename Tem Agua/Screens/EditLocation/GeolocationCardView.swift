@@ -20,6 +20,7 @@ class GeolocationCardView: CardView {
         let label = UILabel()
         label.text = "Usar geolocalização"
         label.font = .preferredFont(forTextStyle: .body)
+        label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
 
         return label

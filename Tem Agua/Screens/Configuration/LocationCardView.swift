@@ -50,6 +50,7 @@ class LocationCardView: CardView {
     private lazy var observationLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .caption1)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .secondaryLabel
         label.text = "Não definido"
         label.numberOfLines = 0
@@ -62,6 +63,7 @@ class LocationCardView: CardView {
         label.text = "Carregando..."
         label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .footnote)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .secondaryLabel
 
         return label

@@ -17,6 +17,7 @@ class CoordinateTextField: UIView {
     private lazy var placeholderLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .footnote)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .secondaryLabel
         label.text = "Placeholder"
 

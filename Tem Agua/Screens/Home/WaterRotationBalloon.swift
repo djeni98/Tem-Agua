@@ -13,6 +13,7 @@ class WaterRotationBalloon: RightBalloonView {
         let label = UILabel()
         label.text = "E o próximo rodízio?"
         label.font = .preferredFont(forTextStyle: .headline)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .label
         label.numberOfLines = 0
 
@@ -23,6 +24,7 @@ class WaterRotationBalloon: RightBalloonView {
         let label = UILabel()
         label.text = Array(1...50).reduce("", { $0 + "\($1)" })
         label.font = .preferredFont(forTextStyle: .body)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .label
         label.numberOfLines = 0
 
@@ -33,6 +35,7 @@ class WaterRotationBalloon: RightBalloonView {
         let label = UILabel()
         label.text = Array(1...10).reduce("", { $0 + "\($1)" })
         label.font = .preferredFont(forTextStyle: .footnote)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .label
         label.numberOfLines = 0
 
@@ -43,6 +46,7 @@ class WaterRotationBalloon: RightBalloonView {
         let label = UILabel()
         label.text = Array(1...10).reduce("", { $0 + "\($1)" })
         label.font = .preferredFont(forTextStyle: .caption1)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .secondaryLabel
         label.numberOfLines = 0
 

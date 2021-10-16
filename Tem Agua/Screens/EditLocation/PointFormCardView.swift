@@ -18,6 +18,7 @@ class PointFormCardView: CardView {
         let label = UILabel()
         label.text = "Inserir manualmente"
         label.font = .preferredFont(forTextStyle: .body)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .label
         label.numberOfLines = 0
 

@@ -30,6 +30,7 @@ class EditLocationViewController: ScrollableViewController {
     private lazy var orLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .secondaryLabel
         label.text = "OU"
         label.textAlignment = .center

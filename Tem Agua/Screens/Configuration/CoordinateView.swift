@@ -20,6 +20,7 @@ class CoordinateView: UIView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .footnote)
+        label.adjustsFontForContentSizeCategory = true
         label.text = "Title"
         label.numberOfLines = 0
 
@@ -29,6 +30,7 @@ class CoordinateView: UIView {
     private lazy var valueLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
+        label.adjustsFontForContentSizeCategory = true
         label.text = "Value"
         label.numberOfLines = 0
 

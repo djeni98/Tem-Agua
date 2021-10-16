@@ -12,6 +12,7 @@ class AnswerBalloon: RightBalloonView {
     private lazy var answerLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1).rounded().bold()
+        label.adjustsFontForContentSizeCategory = true
         label.text = "...."
         label.textColor = .label
 

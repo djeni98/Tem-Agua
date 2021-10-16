@@ -16,6 +16,7 @@ class SimpleRightBalloon: RightBalloonView {
     private lazy var label: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
+        label.adjustsFontForContentSizeCategory = true
         label.text = "Some label"
         label.textColor = .label
         label.numberOfLines = 0

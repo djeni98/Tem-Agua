@@ -34,6 +34,7 @@ class TitleAndButtonView: UIView {
         let label = UILabel()
         label.text = "Title"
         label.font = .preferredFont(forTextStyle: .title1).bold()
+        label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
 
         return label
