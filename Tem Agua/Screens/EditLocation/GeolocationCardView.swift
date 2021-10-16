@@ -16,6 +16,26 @@ class GeolocationCardView: CardView {
         }
     }
 
+    override var isAccessibilityElement: Bool {
+        get { return true }
+        set {}
+    }
+
+    override var accessibilityLabel: String? {
+        get { return titleLabel.accessibilityLabel }
+        set {}
+    }
+
+    override var accessibilityValue: String? {
+        get { return toggle.isOn ? "Ativado" : "Desativado" }
+        set {}
+    }
+
+    override var accessibilityHint: String? {
+        get { return "Toque duas vezes para alternar a configuração" }
+        set {}
+    }
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Usar geolocalização"
@@ -75,6 +95,14 @@ class GeolocationCardView: CardView {
     @objc private func toggleSwitch() {
         self.selected = toggle.isOn
         toggleAction?(self.selected)
+    }
+
+    override func accessibilityActivate() -> Bool {
+        toggle.setOn(!toggle.isOn, animated: true)
+        self.selected = toggle.isOn
+        toggleAction?(self.selected)
+
+        return true
     }
 
     required init?(coder: NSCoder) {
