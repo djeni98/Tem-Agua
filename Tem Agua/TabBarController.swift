@@ -12,6 +12,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         selectedIndex = 0
+        tabBar.accessibilityLabel = "Barra de Abas"
 
         // Do any additional setup after loading the view.
         let viewControllers = [getHomeVC(), getConfigurationVC()]
