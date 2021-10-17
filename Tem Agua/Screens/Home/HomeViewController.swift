@@ -44,6 +44,7 @@ class HomeViewController: ScrollableViewController {
     override func loadView() {
         super.loadView()
 
+        navigationItem.title = "Início"
         view.backgroundColor = .appBackground
         setupContent()
     }

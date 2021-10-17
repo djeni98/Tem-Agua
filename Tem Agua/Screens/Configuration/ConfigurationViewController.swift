@@ -19,6 +19,7 @@ class ConfigurationViewController: ScrollableViewController {
     override func loadView() {
         super.loadView()
 
+        navigationItem.title = "Configurações"
         view.backgroundColor = .appBackground
         setupContent()
     }
