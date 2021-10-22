@@ -20,12 +20,12 @@ class TitleAndButtonView: UIView {
     var action: (() -> Void)?
     private lazy var container: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
         stackView.spacing = 8
 
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(button)
-        stackView.alignment = .firstBaseline
+
+        configure(stackView: stackView)
 
         return stackView
     }()
@@ -33,7 +33,7 @@ class TitleAndButtonView: UIView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Title"
-        label.font = .preferredFont(forTextStyle: .title1).bold()
+        label.font = .preferredFont(forTextStyle: .title2).bold()
         label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
 
@@ -47,6 +47,7 @@ class TitleAndButtonView: UIView {
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         button.setContentHuggingPriority(.required, for: .horizontal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
 
         button.snp.makeConstraints { make in
             make.height.greaterThanOrEqualTo(44)
@@ -84,6 +85,20 @@ class TitleAndButtonView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        configure(stackView: container)
+    }
+
+    private func configure(stackView: UIStackView) {
+        if traitCollection.preferredContentSizeCategory > .extraExtraExtraLarge {
+            stackView.axis = .vertical
+            stackView.alignment = .leading
+        } else {
+            stackView.axis = .horizontal
+            stackView.alignment = .firstBaseline
+        }
     }
 }
 
