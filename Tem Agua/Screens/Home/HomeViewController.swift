@@ -13,7 +13,11 @@ class HomeViewController: ScrollableViewController {
 
     private var objectId: Int?
 
-    private lazy var waterBalloon: WaterQuestionBalloon = .init()
+    private lazy var waterBalloon: WaterQuestionBalloon = {
+        let balloon = WaterQuestionBalloon()
+        balloon.action = waterBalloonRequest
+        return balloon
+    }()
 
     private var xPoint: Double?
     private var yPoint: Double?
@@ -77,11 +81,15 @@ class HomeViewController: ScrollableViewController {
         return Date() > (lastSearch + timeoutTime)
     }
 
-    private func startRequests() {
+    private func waterBalloonRequest() {
+        startRequests(withTimeout: false)
+    }
+
+    private func startRequests(withTimeout: Bool = true) {
         if let location = persistence.getLocationPoint() {
             let point = location.toTuple()
 
-            if isSameLocation(point) && !didTimeout() { return }
+            if isSameLocation(point) && withTimeout && !didTimeout() { return }
 
             xPoint = point.x
             yPoint = point.y

@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 
 class WaterQuestionBalloon: LeftBalloonView {
+
+    var action: (() -> Void)?
+
     private lazy var questionLabel: UILabel = {
         let label = UILabel()
         label.text = "Tem Água?"
@@ -18,6 +21,15 @@ class WaterQuestionBalloon: LeftBalloonView {
         label.numberOfLines = 0
 
         return label
+    }()
+
+    private lazy var whiteOverlay: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.leftBalloonCornerRadius()
+        view.alpha = 0
+
+        return view
     }()
 
     private lazy var gradientBackground: GradientBackgroundView = {
@@ -54,10 +66,36 @@ class WaterQuestionBalloon: LeftBalloonView {
         self.snp.makeConstraints { make in
             make.bottom.equalTo(gradientBackground)
         }
+
+        self.addSubview(whiteOverlay)
+        whiteOverlay.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        singleTap.numberOfTouchesRequired = 1
+        singleTap.numberOfTapsRequired = 1
+
+        self.addGestureRecognizer(singleTap)
+        self.isUserInteractionEnabled = true
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    @objc private func tapAction() {
+        guard let action = action else {
+            print("\(#file): Action not defined")
+            return
+        }
+
+        UIView.animate(withDuration: 0.5) {
+            self.whiteOverlay.alpha = 0.2
+            self.whiteOverlay.alpha = 0
+        }
+
+        action()
     }
 
     private struct LayoutMetrics {
