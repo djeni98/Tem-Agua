@@ -163,9 +163,6 @@ class HomeViewController: ScrollableViewController {
 
             guard let relatedRecords = relatedRecords else { return }
 
-            print("RelatedRecords.count:", relatedRecords.count)
-            print(relatedRecords)
-
             DispatchQueue.main.async {
                 let answerBalloon = AnswerBalloon()
                 answerBalloon.setAnswer(relatedRecords.isEmpty ? "Sim!" : "Não!")
@@ -208,9 +205,6 @@ class HomeViewController: ScrollableViewController {
             }
 
             guard let relatedRecords = relatedRecords else { return }
-
-            print("24 Hours count:", relatedRecords.count)
-            print(relatedRecords)
 
             if relatedRecords.isEmpty {
                 DispatchQueue.main.async {

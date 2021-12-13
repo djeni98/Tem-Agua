@@ -9,10 +9,10 @@ struct WaterRotationViewModel {
     let model: WaterRotation
 
     func getInfoTextAboutCurrentRotation() -> String {
-        let startDayText = model.inicio.toPortugueseText()
-        let endDayText = model.normalizacao.toPortugueseText()
+        let startDayText = model.inicio.toRelativePortugueseText()
+        let endDayText = model.normalizacao.toRelativePortugueseText()
 
-        var text = "A água acabou dia \(startDayText) e a previsão de volta é dia \(endDayText)"
+        var text = "A água acabou \(startDayText) e a previsão de volta é \(endDayText)"
         if let periodo = model.periodo, !periodo.isEmpty {
             text += " (\(periodo))"
         }
@@ -21,11 +21,11 @@ struct WaterRotationViewModel {
     }
 
     func getInfoTextAbout24HoursRotation() -> String {
-        let startDayText = model.inicio.toPortugueseText()
-        let endDayText = model.normalizacao.toPortugueseText()
+        let startDayText = model.inicio.toRelativePortugueseText()
+        let endDayText = model.normalizacao.toRelativePortugueseText()
 
         var text = "Mas tem um rodízio nas próximas 24 horas.\n"
-        text += "Começa dia \(startDayText) e a previsão de volta é dia \(endDayText)"
+        text += "Começa \(startDayText) e a previsão de volta é \(endDayText)"
         if let periodo = model.periodo, !periodo.isEmpty {
             text += " (\(periodo))"
         }
