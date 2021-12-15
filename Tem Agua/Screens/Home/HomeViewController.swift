@@ -81,15 +81,22 @@ class HomeViewController: ScrollableViewController {
         return Date() > (lastSearch + timeoutTime)
     }
 
+    private var isLoading = false
     private func waterBalloonRequest() {
         startRequests(withTimeout: false)
     }
 
     private func startRequests(withTimeout: Bool = true) {
+        if isLoading { return }
+        isLoading = true
+
         if let location = persistence.getLocationPoint() {
             let point = location.toTuple()
 
-            if isSameLocation(point) && withTimeout && !didTimeout() { return }
+            if isSameLocation(point) && withTimeout && !didTimeout() {
+                isLoading = false
+                return
+            }
 
             xPoint = point.x
             yPoint = point.y
@@ -111,6 +118,7 @@ class HomeViewController: ScrollableViewController {
 
             balloon.text = text
             rightBalloonsContainer.addArrangedSubview(balloon)
+            isLoading = false
         }
     }
 
@@ -143,6 +151,7 @@ class HomeViewController: ScrollableViewController {
                     let balloon = SimpleRightBalloon()
                     balloon.text = "Verifique se a localização informada está na região metropolitana de Curitiba."
                     self.rightBalloonsContainer.addArrangedSubview(balloon)
+                    self.isLoading = false
                 }
 
                 return
@@ -164,6 +173,7 @@ class HomeViewController: ScrollableViewController {
                     let balloon = SimpleRightBalloon()
                     balloon.text = "Tente novamente mais tarde."
                     self.rightBalloonsContainer.addArrangedSubview(balloon)
+                    self.isLoading = false
                 }
 
                 return
@@ -194,6 +204,7 @@ class HomeViewController: ScrollableViewController {
                         observationText: currentRotation.observacao
                     )
                     self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
+                    self.isLoading = false
                 }
             }
         }
@@ -207,6 +218,7 @@ class HomeViewController: ScrollableViewController {
             if let _ = error {
                 DispatchQueue.main.async {
                     self.showErrorAlert()
+                    self.isLoading = false
                 }
 
                 return
@@ -223,6 +235,7 @@ class HomeViewController: ScrollableViewController {
                         observationText: nil
                     )
                     self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
+                    self.isLoading = false
                 }
             } else {
                 guard let rotation = WaterRotation.from(relatedRecords.first!) else {
@@ -239,6 +252,7 @@ class HomeViewController: ScrollableViewController {
                         observationText: rotation.observacao
                     )
                     self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
+                    self.isLoading = false
                 }
             }
         }
