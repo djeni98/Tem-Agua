@@ -11,6 +11,7 @@ struct LocationPoint {
     let latitude: Double
     let longitude: Double
     let relatedName: String?
+    let addressString: String?
 
     let source: Source?
     let obtainedAt: Date?
@@ -19,10 +20,15 @@ struct LocationPoint {
         case geolocalization, manually
     }
 
-    init(latitude: Double, longitude: Double, relatedName: String? = nil, source: LocationPoint.Source? = nil, obtainedAt: Date? = nil) {
+    init(
+        latitude: Double, longitude: Double, relatedName: String? = nil,
+        addressString: String? = nil, source: LocationPoint.Source? = nil,
+        obtainedAt: Date? = nil
+    ) {
         self.latitude = latitude
         self.longitude = longitude
         self.relatedName = relatedName
+        self.addressString = addressString
         self.source = source
         self.obtainedAt = obtainedAt
     }

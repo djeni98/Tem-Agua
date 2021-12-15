@@ -16,6 +16,7 @@ class PersistenceService {
         let latitude = defaults.double(forKey: "latitude")
         let longitude = defaults.double(forKey: "longitude")
         let relatedName = defaults.string(forKey: "relatedName")
+        let addressString = defaults.string(forKey: "addressString")
         let source = defaults.integer(forKey: "source")
         let obtainedAt = defaults.object(forKey: "obtainedAt") as? Date
 
@@ -23,6 +24,7 @@ class PersistenceService {
             latitude: latitude,
             longitude: longitude,
             relatedName: relatedName,
+            addressString: addressString,
             source: LocationPoint.Source(rawValue: source),
             obtainedAt: obtainedAt
         )
@@ -33,12 +35,13 @@ class PersistenceService {
         defaults.set(locationPoint.latitude, forKey: "latitude")
         defaults.set(locationPoint.longitude, forKey: "longitude")
         defaults.set(locationPoint.relatedName, forKey: "relatedName")
+        defaults.set(locationPoint.addressString, forKey: "addressString")
         defaults.set(locationPoint.source?.rawValue ?? -1, forKey: "source")
         defaults.set(locationPoint.obtainedAt, forKey: "obtainedAt")
     }
 
     func removeLocationPoint() {
-        for key in ["savedLocation", "latitude", "longitude", "relatedName", "source", "obtainedAt"] {
+        for key in ["savedLocation", "latitude", "longitude", "relatedName", "addressString", "source", "obtainedAt"] {
             defaults.removeObject(forKey: key)
         }
     }

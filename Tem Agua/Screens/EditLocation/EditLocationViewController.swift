@@ -221,10 +221,23 @@ extension EditLocationViewController: CLLocationManagerDelegate {
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
 
-            let location = LocationPoint(latitude: latitude, longitude: longitude, relatedName: nil, source: .geolocalization, obtainedAt: Date())
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(location) { placemarks, error in
+                var address: String? = nil
+                if let placemark = placemarks?.first, let postalAddress = placemark.postalAddress {
+                    let formatter = BRPostalAddressFormatter()
+                    address = formatter.string(from: postalAddress)
+                }
 
-            persistence.saveLocationPoint(location)
-            onFinishEditing?(location)
+                let locationPoint = LocationPoint(
+                    latitude: latitude, longitude: longitude, relatedName: nil,
+                    addressString: address, source: .geolocalization,
+                    obtainedAt: Date()
+                )
+
+                self.persistence.saveLocationPoint(locationPoint)
+                self.onFinishEditing?(locationPoint)
+            }
         }
     }
 

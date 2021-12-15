@@ -47,6 +47,16 @@ class LocationCardView: CardView {
         return view
     }()
 
+    private lazy var addressLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .body)
+        label.adjustsFontForContentSizeCategory = true
+        label.text = "Não definido"
+        label.numberOfLines = 0
+
+        return label
+    }()
+
     private lazy var observationLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .caption1)
@@ -101,11 +111,15 @@ class LocationCardView: CardView {
     }
 
     func finishEditing(with location: LocationPoint) {
-        latitudeView.value = "\(location.latitude)"
-        longitudeView.value = "\(location.longitude)"
-
-        container.addArrangedSubview(latitudeView)
-        container.addArrangedSubview(longitudeView)
+        if let addressString = location.addressString {
+            addressLabel.text = addressString
+            container.addArrangedSubview(addressLabel)
+        } else {
+            latitudeView.value = "\(location.latitude)"
+            longitudeView.value = "\(location.longitude)"
+            container.addArrangedSubview(latitudeView)
+            container.addArrangedSubview(longitudeView)
+        }
 
         guard let observationText = location.getObservationText() else { return }
         observationLabel.text = observationText

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B717354B276A548B00D40880 /* BRPostalAddressFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717354A276A548B00D40880 /* BRPostalAddressFormatter.swift */; };
 		B72A141F270E3255001303BB /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A141E270E3255001303BB /* UIColor+.swift */; };
 		B72A1424270E3686001303BB /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A1423270E3686001303BB /* GradientBackgroundView.swift */; };
 		B72A1432270E3D68001303BB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B72A1431270E3D68001303BB /* SnapKit */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B717354A276A548B00D40880 /* BRPostalAddressFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRPostalAddressFormatter.swift; sourceTree = "<group>"; };
 		B72A141E270E3255001303BB /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		B72A1423270E3686001303BB /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 		B72A1433270E3E2D001303BB /* LeftBalloonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftBalloonView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B7173549276A547300D40880 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B717354A276A548B00D40880 /* BRPostalAddressFormatter.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		B72A141D270E3240001303BB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +233,7 @@
 				B77E60FF270DCDB700C24620 /* SceneDelegate.swift */,
 				B77E6101270DCDB700C24620 /* ViewController.swift */,
 				B78192EC2715D69B004CC365 /* TabBarController.swift */,
+				B7173549276A547300D40880 /* Utils */,
 				B74B8AEB2710861F00102ECB /* ViewModel */,
 				B74B8AE8271081F300102ECB /* Model */,
 				B775D18C270F3F4600E9DFB4 /* Services */,
@@ -344,6 +355,7 @@
 				B7769A81271349DC001A3973 /* CardView.swift in Sources */,
 				B78192F32715ECB2004CC365 /* APIError.swift in Sources */,
 				B7769A8927135C1D001A3973 /* CoordinateView.swift in Sources */,
+				B717354B276A548B00D40880 /* BRPostalAddressFormatter.swift in Sources */,
 				B74B8AED2710862D00102ECB /* WaterRotationViewModel.swift in Sources */,
 				B78192F12715E78C004CC365 /* SimpleRightBalloon.swift in Sources */,
 				B77E6102270DCDB700C24620 /* ViewController.swift in Sources */,
@@ -514,7 +526,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.djeniferrenata.Tem-Agua";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -543,7 +555,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.djeniferrenata.Tem-Agua";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
