@@ -138,12 +138,16 @@ class HomeViewController: ScrollableViewController {
             view.removeFromSuperview()
         }
 
-        let api = APIService()
-        api.getLocationRelatedInfo(x: x, y: y) { id, polygonCoordinates, error in
-            if let error = error {
+        Task {
+            do {
+                let objectId = try await repository.getObjectId(x: x, y: y)
+                self.objectId = objectId
+
+                await self.requestCurrentWaterRotation()
+            } catch {
                 DispatchQueue.main.async {
                     switch error {
-                    case .dataExtractionFailure(_):
+                    case APIError.dataExtractionFailure(_):
                         self.showErrorAlert(title: "Localização informada sem resultados.", message: nil)
                     default:
                         self.showErrorAlert()
@@ -154,16 +158,8 @@ class HomeViewController: ScrollableViewController {
                     self.rightBalloonsContainer.addArrangedSubview(balloon)
                     self.isLoading = false
                 }
-
-                return
-            }
-
-            self.objectId = id
-            Task {
-                await self.requestCurrentWaterRotation()
             }
         }
-
     }
 
     @objc private func requestCurrentWaterRotation() async {

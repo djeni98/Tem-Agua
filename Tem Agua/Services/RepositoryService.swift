@@ -10,6 +10,11 @@ import Foundation
 class RepositoryService {
     let api = APIService()
 
+    func getObjectId(x: Double, y: Double, wkid: Int = 4326) async throws -> Int {
+        let (id, _) = try await api.getLocationRelatedInfo(x: x, y: y, wkid: wkid)
+        return id
+    }
+
     func getCurrentWaterRotation(objectId: Int) async throws -> WaterRotation? {
         let relatedRecords = try await api.getCurrentWaterRotation(objectId: objectId)
 

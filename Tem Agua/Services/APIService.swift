@@ -116,40 +116,29 @@ class APIService {
         request.resume()
     }
 
-    func getLocationRelatedInfo(x: Double, y: Double, wkid: Int = 4326, completion: @escaping (Int?, [[[Double]]]?, APIError?) -> Void) {
+    func getLocationRelatedInfo(x: Double, y: Double, wkid: Int = 4326) async throws -> (Int, [[[Double]]]) {
         let parameters = getParametersForLocationRequest(x: x, y: y, wkid: wkid)
-        guard let url = getURL(from: parameters) else { return }
+        guard let url = getURL(from: parameters) else { throw APIError.URLError }
 
-        request(with: url) { dictionary, error in
-            if let error = error {
-                completion(nil, nil, error)
-                return
-            }
+        let dictionary = try await request(with: url)
 
-            guard let dictionary = dictionary else { return }
-
-            guard let features = dictionary["features"] as? [[String: Any]],
-                  let feature = features.first
-            else {
-                print("\(#line): Could not extract feature from dictionary.")
-                print(dictionary)
-
-                completion(nil, nil, .dataExtractionFailure(.feature))
-                return
-            }
-
-            guard let id = feature["id"] as? Int,
-                  let geometry = feature["geometry"] as? [String: Any],
-                  let coordinates = geometry["coordinates"] as? [[[Double]]]
-            else {
-                print("\(#line): Could not extract id and polygon coordinates from feature.")
-
-                completion(nil, nil, .dataExtractionFailure(.objectId))
-                return
-            }
-
-            completion(id, coordinates, nil)
+        guard let features = dictionary["features"] as? [[String: Any]],
+              let feature = features.first
+        else {
+            print("\(#line): Could not extract feature from dictionary.")
+            print(dictionary)
+            throw APIError.dataExtractionFailure(.feature)
         }
+
+        guard let id = feature["id"] as? Int,
+              let geometry = feature["geometry"] as? [String: Any],
+              let coordinates = geometry["coordinates"] as? [[[Double]]]
+        else {
+            print("\(#line): Could not extract id and polygon coordinates from feature.")
+            throw APIError.dataExtractionFailure(.objectId)
+        }
+
+        return (id, coordinates)
     }
 
     func getCurrentWaterRotation(objectId: Int) async throws -> [[String: Any]] {
