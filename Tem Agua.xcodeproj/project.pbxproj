@@ -48,6 +48,7 @@
 		B78192EF2715DBD5004CC365 /* UINavigationBar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78192EE2715DBD5004CC365 /* UINavigationBar+.swift */; };
 		B78192F12715E78C004CC365 /* SimpleRightBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78192F02715E78C004CC365 /* SimpleRightBalloon.swift */; };
 		B78192F32715ECB2004CC365 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78192F22715ECB2004CC365 /* APIError.swift */; };
+		B79AFF8E277A4F54003E1995 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79AFF8D277A4F54003E1995 /* RepositoryError.swift */; };
 		B7A45B1A27162F8F0078472A /* AnswerBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A45B1927162F8E0078472A /* AnswerBalloon.swift */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +94,7 @@
 		B78192EE2715DBD5004CC365 /* UINavigationBar+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+.swift"; sourceTree = "<group>"; };
 		B78192F02715E78C004CC365 /* SimpleRightBalloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRightBalloon.swift; sourceTree = "<group>"; };
 		B78192F22715ECB2004CC365 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		B79AFF8D277A4F54003E1995 /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
 		B7A45B1927162F8E0078472A /* AnswerBalloon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerBalloon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,6 +159,7 @@
 				B74B8AE92710820000102ECB /* WaterRotation.swift */,
 				B78192F22715ECB2004CC365 /* APIError.swift */,
 				B7769A8A271361A1001A3973 /* LocationPoint.swift */,
+				B79AFF8D277A4F54003E1995 /* RepositoryError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				B72A141F270E3255001303BB /* UIColor+.swift in Sources */,
 				B77E60FE270DCDB700C24620 /* AppDelegate.swift in Sources */,
 				B77E6100270DCDB700C24620 /* SceneDelegate.swift in Sources */,
+				B79AFF8E277A4F54003E1995 /* RepositoryError.swift in Sources */,
 				B72A1424270E3686001303BB /* GradientBackgroundView.swift in Sources */,
 				B78192E52714548C004CC365 /* BorderedTextField.swift in Sources */,
 				B72A143D270E56F8001303BB /* UIView+.swift in Sources */,

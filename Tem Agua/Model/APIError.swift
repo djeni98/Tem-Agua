@@ -23,4 +23,5 @@ enum APIError: Error {
     }
 
     case asyncError
+    case unknown
 }

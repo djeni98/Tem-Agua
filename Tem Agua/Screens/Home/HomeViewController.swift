@@ -102,7 +102,7 @@ class HomeViewController: ScrollableViewController {
             xPoint = point.x
             yPoint = point.y
 
-            requestLocationInfo()
+            requestAllInfo()
             persistence.saveLastSearchDate(Date())
         } else {
             // TODO: let user inform location here
@@ -130,7 +130,7 @@ class HomeViewController: ScrollableViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
-    @objc private func requestLocationInfo() {
+    private func requestAllInfo() {
         guard let x = xPoint, let y = yPoint else { return }
 
         rightBalloonsContainer.arrangedSubviews.forEach { view in
@@ -139,14 +139,34 @@ class HomeViewController: ScrollableViewController {
         }
 
         Task {
+            defer {
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+            }
+
             do {
                 let objectId = try await repository.getObjectId(x: x, y: y)
-                self.objectId = objectId
+                let currentRotation = try await repository.getCurrentWaterRotation(objectId: objectId)
 
-                await self.requestCurrentWaterRotation()
-            } catch {
+                self.configureAnswerBalloon(with: currentRotation == nil ? "Sim!" : "Não!")
+
+                if let rotation = currentRotation {
+                    self.configureCurrentRotation(with: rotation)
+                    return
+                }
+
+                let within24HoursRotation = try await repository.getNewWaterRotationWithin24Hours(objectId: objectId)
+
+                if let rotation = within24HoursRotation {
+                    self.configure24HoursRotation(with: rotation)
+                } else {
+                    self.configureNoWaterRotation()
+                }
+
+            } catch RepositoryError.objectIdError(let apiError) {
                 DispatchQueue.main.async {
-                    switch error {
+                    switch apiError {
                     case APIError.dataExtractionFailure(_):
                         self.showErrorAlert(title: "Localização informada sem resultados.", message: nil)
                     default:
@@ -156,30 +176,17 @@ class HomeViewController: ScrollableViewController {
                     let balloon = SimpleRightBalloon()
                     balloon.text = "Verifique se a localização informada está na região metropolitana de Curitiba."
                     self.rightBalloonsContainer.addArrangedSubview(balloon)
-                    self.isLoading = false
                 }
-            }
-        }
-    }
-
-    @objc private func requestCurrentWaterRotation() async {
-        guard let objectId = objectId else { return }
-
-        do {
-            let waterRotation = try await repository.getCurrentWaterRotation(objectId: objectId)
-            self.configureAnswerBalloon(with: waterRotation == nil ? "Sim!" : "Não!")
-
-            if let currentRotation = waterRotation {
-                self.configureCurrentRotation(with: currentRotation)
-            } else {
-                await self.requestWaterRotationWithin24Hours()
-            }
-        } catch {
-            DispatchQueue.main.async {
-                let balloon = SimpleRightBalloon()
-                balloon.text = "Tente novamente mais tarde."
-                self.rightBalloonsContainer.addArrangedSubview(balloon)
-                self.isLoading = false
+            } catch RepositoryError.currentRotationError(_) {
+                DispatchQueue.main.async {
+                    let balloon = SimpleRightBalloon()
+                    balloon.text = "Tente novamente mais tarde."
+                    self.rightBalloonsContainer.addArrangedSubview(balloon)
+                }
+            } catch RepositoryError.within24HoursRotationError(_) {
+                DispatchQueue.main.async {
+                    self.showErrorAlert()
+                }
             }
         }
     }
@@ -203,25 +210,6 @@ class HomeViewController: ScrollableViewController {
             )
             self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
             self.isLoading = false
-        }
-    }
-
-    @objc private func requestWaterRotationWithin24Hours() async {
-        guard let objectId = objectId else { return }
-
-        do {
-            let waterRotation = try await repository.getNewWaterRotationWithin24Hours(objectId: objectId)
-
-            if let rotation = waterRotation {
-                self.configure24HoursRotation(with: rotation)
-            } else {
-                self.configureNoWaterRotation()
-            }
-        } catch {
-            DispatchQueue.main.async {
-                self.showErrorAlert()
-                self.isLoading = false
-            }
         }
     }
 
