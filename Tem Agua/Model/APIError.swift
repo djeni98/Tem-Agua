@@ -6,6 +6,8 @@
 //
 
 enum APIError: Error {
+    case URLError
+
     case serverError(Error)
     case dataNotAvailable
     case jsonSerializationError
@@ -19,4 +21,6 @@ enum APIError: Error {
         case objectId
         case relatedGroups
     }
+
+    case asyncError
 }

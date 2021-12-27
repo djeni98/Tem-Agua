@@ -10,6 +10,7 @@ import SnapKit
 
 class HomeViewController: ScrollableViewController {
     private lazy var persistence: PersistenceService = .init()
+    private lazy var repository: RepositoryService = .init()
 
     private var objectId: Int?
 
@@ -158,103 +159,100 @@ class HomeViewController: ScrollableViewController {
             }
 
             self.objectId = id
-            self.requestCurrentWaterRotation()
+            Task {
+                await self.requestCurrentWaterRotation()
+            }
         }
 
     }
 
-    @objc private func requestCurrentWaterRotation() {
+    @objc private func requestCurrentWaterRotation() async {
         guard let objectId = objectId else { return }
 
-        let api = APIService()
-        api.getCurrentWaterRotation(objectId: objectId) { relatedRecords, error in
-            if let _ = error {
-                DispatchQueue.main.async {
-                    let balloon = SimpleRightBalloon()
-                    balloon.text = "Tente novamente mais tarde."
-                    self.rightBalloonsContainer.addArrangedSubview(balloon)
-                    self.isLoading = false
-                }
+        do {
+            let waterRotation = try await repository.getCurrentWaterRotation(objectId: objectId)
+            self.configureAnswerBalloon(with: waterRotation == nil ? "Sim!" : "Não!")
 
-                return
+            if let currentRotation = waterRotation {
+                self.configureCurrentRotation(with: currentRotation)
+            } else {
+                await self.requestWaterRotationWithin24Hours()
             }
-
-            guard let relatedRecords = relatedRecords else { return }
-
+        } catch {
             DispatchQueue.main.async {
-                let answerBalloon = AnswerBalloon()
-                answerBalloon.setAnswer(relatedRecords.isEmpty ? "Sim!" : "Não!")
-                self.rightBalloonsContainer.addArrangedSubview(answerBalloon)
-            }
-
-            if relatedRecords.isEmpty {
-                self.requestWaterRotationWithin24Hours()
-            } else {
-                guard let currentRotation = WaterRotation.from(relatedRecords.first!) else {
-                    print("\(#line): Could not transform dictionary to WaterRotation model")
-                    return
-                }
-
-                let viewModel = WaterRotationViewModel(model: currentRotation)
-                DispatchQueue.main.async {
-                    let waterBalloon = WaterRotationBalloon()
-                    waterBalloon.configure(
-                        isNextRotation: false,
-                        rotationInfoText: viewModel.getInfoTextAboutCurrentRotation(),
-                        observationText: currentRotation.observacao
-                    )
-                    self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
-                    self.isLoading = false
-                }
+                let balloon = SimpleRightBalloon()
+                balloon.text = "Tente novamente mais tarde."
+                self.rightBalloonsContainer.addArrangedSubview(balloon)
+                self.isLoading = false
             }
         }
     }
 
-    @objc private func requestWaterRotationWithin24Hours() {
+    private func configureAnswerBalloon(with text: String) {
+        DispatchQueue.main.async {
+            let answerBalloon = AnswerBalloon()
+            answerBalloon.setAnswer(text)
+            self.rightBalloonsContainer.addArrangedSubview(answerBalloon)
+        }
+    }
+
+    private func configureCurrentRotation(with rotation: WaterRotation) {
+        DispatchQueue.main.async {
+            let viewModel = WaterRotationViewModel(model: rotation)
+            let waterBalloon = WaterRotationBalloon()
+            waterBalloon.configure(
+                isNextRotation: false,
+                rotationInfoText: viewModel.getInfoTextAboutCurrentRotation(),
+                observationText: rotation.observacao
+            )
+            self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
+            self.isLoading = false
+        }
+    }
+
+    @objc private func requestWaterRotationWithin24Hours() async {
         guard let objectId = objectId else { return }
 
-        let api = APIService()
-        api.getNewWaterRotationWithin24Hours(objectId: objectId) { relatedRecords, error in
-            if let _ = error {
-                DispatchQueue.main.async {
-                    self.showErrorAlert()
-                    self.isLoading = false
-                }
+        do {
+            let waterRotation = try await repository.getNewWaterRotationWithin24Hours(objectId: objectId)
 
-                return
-            }
-
-            guard let relatedRecords = relatedRecords else { return }
-
-            if relatedRecords.isEmpty {
-                DispatchQueue.main.async {
-                    let waterBalloon = WaterRotationBalloon()
-                    waterBalloon.configure(
-                        isNextRotation: false,
-                        rotationInfoText: "Sem rodízio nas próximas 24 horas.",
-                        observationText: nil
-                    )
-                    self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
-                    self.isLoading = false
-                }
+            if let rotation = waterRotation {
+                self.configure24HoursRotation(with: rotation)
             } else {
-                guard let rotation = WaterRotation.from(relatedRecords.first!) else {
-                    print("\(#line): Could not transform dictionary to WaterRotation model")
-                    return
-                }
-
-                let viewModel = WaterRotationViewModel(model: rotation)
-                DispatchQueue.main.async {
-                    let waterBalloon = WaterRotationBalloon()
-                    waterBalloon.configure(
-                        isNextRotation: false,
-                        rotationInfoText: viewModel.getInfoTextAbout24HoursRotation(),
-                        observationText: rotation.observacao
-                    )
-                    self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
-                    self.isLoading = false
-                }
+                self.configureNoWaterRotation()
             }
+        } catch {
+            DispatchQueue.main.async {
+                self.showErrorAlert()
+                self.isLoading = false
+            }
+        }
+    }
+
+    private func configure24HoursRotation(with rotation: WaterRotation) {
+        let viewModel = WaterRotationViewModel(model: rotation)
+        DispatchQueue.main.async {
+            let waterBalloon = WaterRotationBalloon()
+            waterBalloon.configure(
+                isNextRotation: false,
+                rotationInfoText: viewModel.getInfoTextAbout24HoursRotation(),
+                observationText: rotation.observacao
+            )
+            self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
+            self.isLoading = false
+        }
+    }
+
+    private func configureNoWaterRotation() {
+        DispatchQueue.main.async {
+            let waterBalloon = WaterRotationBalloon()
+            waterBalloon.configure(
+                isNextRotation: false,
+                rotationInfoText: "Sem rodízio nas próximas 24 horas.",
+                observationText: nil
+            )
+            self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
+            self.isLoading = false
         }
     }
 }

@@ -57,6 +57,19 @@ class APIService {
         return urlComponents.url
     }
 
+    private func request(with url: URL) async throws -> [String: Any] {
+        typealias RequestContinuation = CheckedContinuation<[String: Any], Error>
+        return try await withCheckedThrowingContinuation { (continuation: RequestContinuation) in
+            request(with: url) { dictionary, error in
+                if let dictionary = dictionary {
+                    continuation.resume(returning: dictionary)
+                } else {
+                    continuation.resume(throwing: error ?? APIError.asyncError)
+                }
+            }
+        }
+    }
+
     private func request(with url: URL, completion: @escaping ([String: Any]?, APIError?) -> Void) {
         let request = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
@@ -139,46 +152,37 @@ class APIService {
         }
     }
 
-    func getCurrentWaterRotation(objectId: Int, completion: @escaping ([[String: Any]]?, APIError?) -> Void) {
+    func getCurrentWaterRotation(objectId: Int) async throws -> [[String: Any]] {
         let sqlParam = "(CURRENT_TIMESTAMP BETWEEN INICIO AND NORMALIZACAO)"
-        requestRelationship(sqlParam: sqlParam, objectId: objectId, completion: completion)
+        return try await requestRelationship(sqlParam: sqlParam, objectId: objectId)
     }
 
-    func getNewWaterRotationWithin24Hours(objectId: Int, completion: @escaping ([[String: Any]]?, APIError?) -> Void) {
+    func getNewWaterRotationWithin24Hours(objectId: Int) async throws -> [[String: Any]] {
         let sqlParam = "(INICIO BETWEEN CURRENT_TIMESTAMP AND CURRENT_TIMESTAMP + 1)"
-        requestRelationship(sqlParam: sqlParam, objectId: objectId, completion: completion)
+        return try await requestRelationship(sqlParam: sqlParam, objectId: objectId)
     }
 
-    func getNextWaterRotation(objectId: Int, completion: @escaping ([[String: Any]]?, APIError?) -> Void) {
+    func getNextWaterRotation(objectId: Int) async throws -> [[String: Any]] {
         let sqlParam = "(INICIO > CURRENT_TIMESTAMP)"
-        requestRelationship(sqlParam: sqlParam, objectId: objectId, completion: completion)
+        return try await requestRelationship(sqlParam: sqlParam, objectId: objectId)
     }
 
-    private func requestRelationship(sqlParam: String, objectId: Int, completion: @escaping ([[String: Any]]?, APIError?) -> Void) {
+    private func requestRelationship(sqlParam: String, objectId: Int) async throws -> [[String: Any]] {
         var parameters = getParametersForRelationshipRequest(objectId: "\(objectId)", from: .poligonoRodizio, to: .tabelaRodizio)
 
         parameters.queryItems.append(
             URLQueryItem(name: "definitionExpression", value: sqlParam)
         )
 
-        guard let url = getURL(from: parameters) else { return }
+        guard let url = getURL(from: parameters) else { throw APIError.URLError }
+        let dictionary = try await request(with: url)
 
-        request(with: url) { dictionary, error in
-            if let error = error {
-                completion(nil, error)
-                return
-            }
-
-            guard let dictionary = dictionary else { return }
-            guard let relatedRecords = self.getRelatedRecords(from: dictionary) else {
-                print("\(#line): Could not extract related records from dictionary.")
-
-                completion(nil, .dataExtractionFailure(.relatedGroups))
-                return
-            }
-
-            completion(relatedRecords, nil)
+        guard let relatedRecords = self.getRelatedRecords(from: dictionary) else {
+            print("\(#line): Could not extract related records from dictionary.")
+            throw APIError.dataExtractionFailure(.relatedGroups)
         }
+
+        return relatedRecords
     }
 
     private func getRelatedRecords(from dictionary: [String: Any]) -> [[String: Any]]? {

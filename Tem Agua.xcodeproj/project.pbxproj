@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B717354B276A548B00D40880 /* BRPostalAddressFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717354A276A548B00D40880 /* BRPostalAddressFormatter.swift */; };
+		B71C13EE277A36C300177948 /* RepositoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71C13ED277A36C300177948 /* RepositoryService.swift */; };
 		B72A141F270E3255001303BB /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A141E270E3255001303BB /* UIColor+.swift */; };
 		B72A1424270E3686001303BB /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A1423270E3686001303BB /* GradientBackgroundView.swift */; };
 		B72A1432270E3D68001303BB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B72A1431270E3D68001303BB /* SnapKit */; };
@@ -52,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		B717354A276A548B00D40880 /* BRPostalAddressFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRPostalAddressFormatter.swift; sourceTree = "<group>"; };
+		B71C13ED277A36C300177948 /* RepositoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryService.swift; sourceTree = "<group>"; };
 		B72A141E270E3255001303BB /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		B72A1423270E3686001303BB /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 		B72A1433270E3E2D001303BB /* LeftBalloonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftBalloonView.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			children = (
 				B775D18D270F400F00E9DFB4 /* APIService.swift */,
 				B7769A8C27136400001A3973 /* PersistenceService.swift */,
+				B71C13ED277A36C300177948 /* RepositoryService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				B74B8AEA2710820000102ECB /* WaterRotation.swift in Sources */,
 				B78192EF2715DBD5004CC365 /* UINavigationBar+.swift in Sources */,
 				B7665BA82711D6E40044706B /* HomeViewController.swift in Sources */,
+				B71C13EE277A36C300177948 /* RepositoryService.swift in Sources */,
 				B775D17A270F096200E9DFB4 /* RightBalloonView.swift in Sources */,
 				B7769A9127136EC3001A3973 /* ScreensLayoutMetrics.swift in Sources */,
 				B72A1434270E3E2D001303BB /* LeftBalloonView.swift in Sources */,
