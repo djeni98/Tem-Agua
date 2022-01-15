@@ -109,6 +109,14 @@ class WaterRotationBalloon: RightBalloonView {
         containerStackView.addArrangedSubview(dateLabel)
     }
 
+    func configure(with viewModel: WaterRotationViewModel) {
+        configure(
+            isNextRotation: false,
+            rotationInfoText: viewModel.rotationInfoText,
+            observationText: viewModel.observationText
+        )
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

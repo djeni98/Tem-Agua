@@ -64,7 +64,6 @@ class HomeViewController: ScrollableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         startRequests()
     }
 
@@ -152,14 +151,14 @@ class HomeViewController: ScrollableViewController {
                 self.configureAnswerBalloon(with: currentRotation == nil ? "Sim!" : "Não!")
 
                 if let rotation = currentRotation {
-                    self.configureCurrentRotation(with: rotation)
+                    self.configureRotation(with: WaterRotationViewModel(model: rotation, type: .current))
                     return
                 }
 
                 let within24HoursRotation = try await repository.getNewWaterRotationWithin24Hours(objectId: objectId)
 
                 if let rotation = within24HoursRotation {
-                    self.configure24HoursRotation(with: rotation)
+                    self.configureRotation(with: WaterRotationViewModel(model: rotation, type: .within24Hours))
                 } else {
                     self.configureNoWaterRotation()
                 }
@@ -199,31 +198,11 @@ class HomeViewController: ScrollableViewController {
         }
     }
 
-    private func configureCurrentRotation(with rotation: WaterRotation) {
-        DispatchQueue.main.async {
-            let viewModel = WaterRotationViewModel(model: rotation)
-            let waterBalloon = WaterRotationBalloon()
-            waterBalloon.configure(
-                isNextRotation: false,
-                rotationInfoText: viewModel.getInfoTextAboutCurrentRotation(),
-                observationText: rotation.observacao
-            )
-            self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
-            self.isLoading = false
-        }
-    }
-
-    private func configure24HoursRotation(with rotation: WaterRotation) {
-        let viewModel = WaterRotationViewModel(model: rotation)
+    private func configureRotation(with viewModel: WaterRotationViewModel) {
         DispatchQueue.main.async {
             let waterBalloon = WaterRotationBalloon()
-            waterBalloon.configure(
-                isNextRotation: false,
-                rotationInfoText: viewModel.getInfoTextAbout24HoursRotation(),
-                observationText: rotation.observacao
-            )
+            waterBalloon.configure(with: viewModel)
             self.rightBalloonsContainer.addArrangedSubview(waterBalloon)
-            self.isLoading = false
         }
     }
 

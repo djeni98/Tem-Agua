@@ -7,6 +7,26 @@
 
 struct WaterRotationViewModel {
     let model: WaterRotation
+    let type: RotationType
+
+    enum RotationType {
+        case current, within24Hours
+    }
+
+    var rotationInfoText: String {
+        get {
+            switch type {
+            case .current:
+                return getInfoTextAboutCurrentRotation()
+            case .within24Hours:
+                return getInfoTextAbout24HoursRotation()
+            }
+        }
+    }
+
+    var observationText: String? {
+        get { model.observacao }
+    }
 
     func getInfoTextAboutCurrentRotation() -> String {
         let startDayText = model.inicio.toRelativePortugueseText()
